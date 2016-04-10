@@ -1,7 +1,10 @@
 package io.tipsters.error;
 
-public class BaseError extends RuntimeException {
-    public BaseError(String message) {
+/**
+ * Base class for all application errors
+ */
+class BaseError extends RuntimeException {
+    BaseError(String message) {
         super(message);
     }
 }

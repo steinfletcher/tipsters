@@ -1,6 +1,9 @@
 
-INSERT INTO leagues(id, name) VALUES
-  ('05c6dd65-8141-4093-827a-b05372bcbbe5', 'Premier League');
+INSERT INTO countries(id, name) VALUES
+  ('720efe16-0517-47bf-8af0-e6fcca8baa6c', 'England');
+
+INSERT INTO leagues(id, country_id, name) VALUES
+  ('05c6dd65-8141-4093-827a-b05372bcbbe5', '720efe16-0517-47bf-8af0-e6fcca8baa6c', 'Premier League');
 
 INSERT INTO teams(id, league_id, name) VALUES
   ('16b0c1a9-91b3-470f-b2c4-47d304ba4fb2', '05c6dd65-8141-4093-827a-b05372bcbbe5', 'Arsenal'),
