@@ -1,0 +1,19 @@
+
+server:
+  context-path: /api/tipsters
+  port: 18080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tipsters
+    username: postgres
+    password: postgres
+    driver: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+logging.level.: INFO
+logging.level:
+  io.tipsters: DEBUG
