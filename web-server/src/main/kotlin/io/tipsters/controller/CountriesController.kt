@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RequestMethod.GET
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
-@RestController("/countries")
+@RestController
+@RequestMapping("/countries")
 class CountriesController @Autowired constructor(private val countryService: CountryService) {
 
     @RequestMapping(method = arrayOf(GET))
