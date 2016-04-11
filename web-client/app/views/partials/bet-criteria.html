@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-md-6" ng-repeat="country in countries">
+    <button type="button" class="btn ink-reaction btn-raised" ng-class="country.competitions[0].selected ? 'btn-success' : 'btn-primary'"
+            ng-click="competitionClicked(country.competitions[0])">
+      {{country.competitions[0].name}}
+    </button>
+  </div>
+</div>
+<br />
+<div class="row">
+  <div class="btn-group col-md-12">
+    <label class="btn btn-default btn-radio" ng-class="{'active': reward == '0'}">
+      <input type="radio" ng-model="reward" value="0"> Low reward
+    </label>
+    <label class="btn btn-default btn-radio" ng-class="{'active': reward == '1'}">
+      <input type="radio" ng-model="reward" value="1"> Medium reward
+    </label>
+    <label class="btn btn-default btn-radio" ng-class="{'active': reward == '2'}">
+      <input type="radio" ng-model="reward" value="2"> High reward
+    </label>
+    <label class="btn btn-default btn-radio" ng-class="{'active': reward == '3'}">
+      <input type="radio" ng-model="reward" value="3"> Amazing reward
+    </label>
+  </div>
+</div>
+<br />
+<button type="button" class="btn ink-reaction btn-floating-action btn-lg btn-warning">Go!</button>
