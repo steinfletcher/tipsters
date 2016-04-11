@@ -10,8 +10,6 @@ spring:
     password: postgres
     driver: org.postgresql.Driver
   jpa:
-    hibernate:
-      ddl-auto: create-drop
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
 logging.level.: INFO
