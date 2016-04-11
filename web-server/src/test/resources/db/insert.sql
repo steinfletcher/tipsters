@@ -1,10 +1,10 @@
-INSERT INTO countries (id, name, priority) VALUES
+INSERT INTO countries (id, name, rank) VALUES
   ('720efe16-0517-47bf-8af0-e6fcca8baa6c', 'England', 1),
   ('d8e226b2-f78f-4448-b94c-2e94f12108a7', 'Spain', 2),
   ('88a7559e-0e18-4e84-952e-67db32e51bb9', 'Germany', 3),
   ('d495cfbe-257e-453c-8742-8034e0e9c49a', 'France', 4);
 
-INSERT INTO competitions (id, country_id, name, priority) VALUES
+INSERT INTO competitions (id, country_id, name, rank) VALUES
   -- england
   ('05c6dd65-8141-4093-827a-b05372bcbbe5', '720efe16-0517-47bf-8af0-e6fcca8baa6c', 'Premier League', 1),
   ('5070aa50-e5fe-4f3b-84a6-7b304c5533fb', '720efe16-0517-47bf-8af0-e6fcca8baa6c', 'Championship', 2),

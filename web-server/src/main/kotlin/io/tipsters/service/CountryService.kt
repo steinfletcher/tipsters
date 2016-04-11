@@ -12,7 +12,6 @@ class CountryService @Autowired constructor(private val countryRepository: Count
 
     fun countriesOrderedByPriority(limit: Int): List<CountryData> =
             countryRepository
-                    .findAll(PageRequest(0, limit, ASC, "priority"))
+                    .findAll(PageRequest(0, limit, ASC, "rank"))
                     .content.map { country -> CountryData.of(country) }
-
 }

@@ -9,7 +9,7 @@ import javax.persistence.Table
 @Table(name = "competitions")
 class Competition (
         var name: String = "",
-        var priority: Int = 0,
+        var rank: Int = 0,
         @ManyToOne @JoinColumn(name = "country_id") var country: Country) : BaseEntity() {
     constructor() : this("", 0, Country())
 }
