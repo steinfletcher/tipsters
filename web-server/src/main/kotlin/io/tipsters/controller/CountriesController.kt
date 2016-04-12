@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/countries")
-class CountriesController @Autowired constructor(private val countryService: CountryService) {
+class CountriesController @Autowired constructor(val countryService: CountryService) {
 
     @RequestMapping(method = arrayOf(GET))
     fun countries(@RequestParam(name = "limit", defaultValue = "10") limit: Int): List<CountryData> =

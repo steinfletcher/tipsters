@@ -10,5 +10,4 @@ class Country(
         @OneToMany(fetch = FetchType.LAZY, cascade = arrayOf(CascadeType.ALL), mappedBy = "country")
             var competitions: List<Competition> = arrayListOf()
 ) : BaseEntity() {
-
 }

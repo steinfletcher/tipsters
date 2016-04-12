@@ -22,10 +22,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="football-data-client" />
         <module name="web-server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="football-data-client" target="1.8" />
       <module name="tipsters" target="1.8" />
       <module name="web-client" target="1.8" />
       <module name="web-server" target="1.8" />
