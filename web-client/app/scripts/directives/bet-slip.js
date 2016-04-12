@@ -7,12 +7,13 @@
  * # betSlip
  */
 angular.module('tipstersApp')
-  .directive('betSlip', function () {
+  .directive('betSlip', function (datashare) {
     return {
       templateUrl: '../views/partials/bet-slip.html',
       restrict: 'E',
       $scope: {},
-      link: function () {
+      link: function (scope) {
+        scope.datashare = datashare;
       }
     };
   });

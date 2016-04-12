@@ -7,14 +7,16 @@
  * # select
  */
 angular.module('tipstersApp')
-  .directive('betCriteria', function (dataRetrieval) {
+  .directive('betCriteria', function (dataRetrieval, slipGeneration, datashare) {
     return {
       templateUrl: '../views/partials/bet-criteria.html',
       restrict: 'E',
       $scope: {},
       link: function (scope) {
 
+        scope.datashare = datashare;
         scope.reward = 2;
+        scope.targetOdds = 10;
 
         //fetch the countries and competitions available
         dataRetrieval.getCountries().success(function (data) {
@@ -37,7 +39,10 @@ angular.module('tipstersApp')
          * Generate bet with selected values
          */
         scope.generateBet = function () {
-
+          dataRetrieval.getMatches().success(function (data) {
+            scope.datashare.slip = slipGeneration.generateSlip(data.competitions, scope.targetOdds);
+            scope.datashare.slipOdds = slipGeneration.calculateSlipOdds(scope.datashare.slip);
+          });
         };
       }
     };

@@ -1,1 +1,19 @@
-Betslip
+<h3> Slip Odds: {{datashare.slipOdds}}</h3>
+<h3> Total lines: {{datashare.slip.length}}</h3>
+<div class="row" ng-repeat="match in datashare.slip">
+  <div class="col-md-3"ng-class="(match.home == match.selection.outcome) ? 'text-ultra-bold' : ''">
+    {{match.home}}
+  </div>
+  <div class="col-md-1">
+    VS
+  </div>
+  <div class="col-md-3" ng-class="(match.away == match.selection.outcome) ? 'text-ultra-bold' : ''">
+    {{match.away}}
+  </div>
+  <div class="col-md-1">
+    {{match.date}}
+  </div>
+  <div class="col-md-2">
+    <b> {{match.selection.oddsDecimal}}</b> - {{match.selection.outcome}}
+  </div>
+</div>

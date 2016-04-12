@@ -22,5 +22,16 @@ angular.module('tipstersApp')
       });
     };
 
+
+    /**
+     * get the matches for a set of selected competitions
+     * @returns {HttpPromise}
+       */
+    api.getMatches = function(){
+      return $http.get('../../resources/match.json', {
+
+      });
+    };
+
     return api;
   });
