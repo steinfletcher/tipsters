@@ -10,7 +10,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>football-data-client</artifactId>
+    <artifactId>odds-client</artifactId>
 
     <dependencies>
         <dependency>

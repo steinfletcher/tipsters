@@ -10,7 +10,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>football-data-client</module>
+        <module>odds-client</module>
         <module>web-client</module>
         <module>web-server</module>
     </modules>
