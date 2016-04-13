@@ -10,11 +10,11 @@ class RestErrorHandlerTest {
 
     @Test
     fun mapsTeamNotFoundError() {
-        val notFoundError = OddsApiError("Team ABC not found")
+        val error = OddsApiError("Some error")
 
-        val errorResponse = underTest.handleException(notFoundError)
+        val errorResponse = underTest.handleException(error)
 
-        assertThat(errorResponse.message, `is`("Team ABC not found"))
-        assertThat(errorResponse.type, `is`("TeamNotFoundError"))
+        assertThat(errorResponse.message, `is`("Some error"))
+        assertThat(errorResponse.type, `is`("OddsApiError"))
     }
 }
