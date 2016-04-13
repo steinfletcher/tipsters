@@ -10,7 +10,7 @@ import java.util.*
 
 @SqlGroup(Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD,
         scripts = arrayOf("classpath:db/create.sql", "classpath:db/insert.sql")))
-class MatchRepositoryTest : RepositoryTest() {
+class CompetitionRepositoryTest : RepositoryTest() {
 
     @Autowired
     lateinit var underTest: CompetitionRepository

@@ -20,6 +20,13 @@ internal class ErrorMapper {
         return createResponseBody(error)
     }
 
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseBody
+    fun handleException(error: CompetitionNotFoundError): ErrorResponse {
+        return createResponseBody(error)
+    }
+
     private fun createResponseBody(error: BaseError): ErrorResponse {
         return ErrorResponse(error.javaClass.simpleName, error.message.orEmpty())
     }

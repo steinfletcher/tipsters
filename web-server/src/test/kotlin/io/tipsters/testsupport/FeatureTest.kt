@@ -2,6 +2,8 @@ package io.tipsters.testsupport
 
 import io.tipsters.Application
 import io.tipsters.config.PersistenceConfig
+import io.tipsters.testsupport.stub.WilliamHillOddsFeedStub
+import org.junit.After
 import org.junit.Before
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
@@ -21,9 +23,17 @@ abstract class FeatureTest {
     @Autowired
     protected lateinit var context: WebApplicationContext
     protected lateinit var mockMvc: MockMvc
+    val oddsFeedStub = WilliamHillOddsFeedStub(19001)
 
     @Before
     fun setUp() {
+        oddsFeedStub.start()
         mockMvc = MockMvcBuilders.webAppContextSetup(context).build()
+    }
+
+
+    @After
+    fun teardown() {
+        oddsFeedStub.stop()
     }
 }

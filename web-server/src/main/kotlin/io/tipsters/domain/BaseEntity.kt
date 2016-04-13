@@ -16,8 +16,4 @@ abstract class BaseEntity : Serializable {
     @Type(type = "pg-uuid")
     var id: UUID = UUID.randomUUID()
         private set
-
-    fun initNew() {
-        this.id = UUID.randomUUID()
-    }
 }

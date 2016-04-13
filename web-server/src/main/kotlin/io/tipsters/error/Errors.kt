@@ -13,3 +13,5 @@ open class BaseError(message: String) : RuntimeException(message)
 class ErrorResponse(val type: String, val message: String)
 
 class OddsApiError(message: String) : BaseError(message)
+
+class CompetitionNotFoundError(message: String) : BaseError(message)
