@@ -1,9 +1,5 @@
-package io.tipsters.oddsfeedclient.parser
+package io.tipsters.oddsclient.discovery
 
-import io.tipsters.oddsfeedclient.domain.Bet
-import io.tipsters.oddsfeedclient.domain.Competition
-import io.tipsters.oddsfeedclient.domain.Competitions
-import io.tipsters.oddsfeedclient.domain.Match
 import org.xml.sax.Attributes
 import org.xml.sax.helpers.DefaultHandler
 import java.io.InputStream
@@ -11,40 +7,36 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import javax.xml.parsers.SAXParserFactory
 
-/**
- * A parser to extract odds from William Hill XML response
- */
+fun main(args: Array<String>) {
+    val inputStream = ClassLoader.getSystemResourceAsStream("uk_football_stream.xml")
+    val parser = WillHillOddsFeedParser(inputStream)
+
+    val competitions = parser.parse()
+
+    val leagues = competitions.competitions.map { c -> c.name }
+    println(leagues.joinToString { s -> s })
+}
+
 class WillHillOddsFeedParser constructor(val inputStream: InputStream) {
     fun parse(): Competitions {
-        val parser = SAXParserFactory.newInstance().newSAXParser()
-
-        val handler = OddsXmlStreamHandler()
+        val parserFactory = SAXParserFactory.newInstance()
+        val parser = parserFactory.newSAXParser()
+        val handler = CompetitionXmlStreamParser()
         parser.parse(inputStream, handler)
-
         return handler.odds
     }
 }
 
-/**
- * Parses the odds XML data as a stream (rather than mapping to POJO).
- * This is more efficient as the entire DOM is not loaded into memory.
- * Not thread safe (create an instance per invocation)
- */
-internal class OddsXmlStreamHandler : DefaultHandler() {
-    lateinit var matches: MutableList<Match>
-    var match: Match? = null
-
-    lateinit var bets: MutableList<Bet>
-    lateinit var bet: Bet
-    lateinit var content: String
-
+internal class CompetitionXmlStreamParser : DefaultHandler() {
     lateinit var competition: Competition
+    var match: Match? = null
+    lateinit var bet: Bet
+    lateinit var matches: MutableList<Match>
+    lateinit var bets: MutableList<Bet>
+    lateinit var content: String
     val competitions = mutableListOf<Competition>()
     val odds = Competitions(competitions)
 
-    /**
-     * Event handler for when an xml element is started
-     */
     override fun startElement(uri: String, localName: String, qName: String, attr: Attributes) {
         when (qName) {
             "type" -> {
@@ -61,21 +53,6 @@ internal class OddsXmlStreamHandler : DefaultHandler() {
             else -> {
             }
         }
-    }
-
-    /**
-     * Event handler for when an xml element is completed
-     */
-    override fun endElement(uri: String?, localName: String?, qName: String?) {
-        when (qName) {
-            "type" -> competitions.add(competition)
-            "market" -> if (match != null) matches.add(match!!)
-            "participant" -> bets.add(bet)
-        }
-    }
-
-    override fun characters(ch: CharArray?, start: Int, length: Int) {
-        content = java.lang.String.copyValueOf(ch, start, length)
     }
 
     private fun extractMatchFromElement(attr: Attributes): Match? {
@@ -101,4 +78,24 @@ internal class OddsXmlStreamHandler : DefaultHandler() {
     }
 
     private fun parseDateTime(date: String, time: String) = LocalDateTime.parse("${date}T$time", DateTimeFormatter.ISO_DATE_TIME)
+
+    override fun endElement(uri: String?, localName: String?, qName: String?) {
+        when (qName) {
+            "type" -> competitions.add(competition)
+            "market" -> if (match != null) matches.add(match!!)
+            "participant" -> bets.add(bet)
+        }
+    }
+
+    override fun characters(ch: CharArray?, start: Int, length: Int) {
+        content = java.lang.String.copyValueOf(ch, start, length)
+    }
 }
+
+data class Bet(val outcome: String, val oddsDecimal: Float, val odds: String)
+
+data class Match(val home: String, val away: String, val betType: String, val bets: List<Bet>, val date: LocalDateTime, val url: String)
+
+data class Competition(val name: String, val matches: List<Match>)
+
+data class Competitions(val competitions: List<Competition>)

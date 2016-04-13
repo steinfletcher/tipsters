@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.ResponseStatus
 internal class ErrorMapper {
 
     @ExceptionHandler
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
-    fun handleException(error: TeamNotFoundError): ErrorResponse {
+    fun handleException(error: OddsApiError): ErrorResponse {
         return createResponseBody(error)
     }
 
