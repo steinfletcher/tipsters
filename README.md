@@ -1,6 +1,6 @@
 ## tipsters
 
-### Run the api
+### REST api
 
 1. Ensure a postgres database is installed with database name tipsters
 2. Run the create db script at ```tipsters/web-server/src/test/resources/db/create.sql```
