@@ -34,9 +34,6 @@ class MatchesTest : FeatureTest() {
                 .andExpect(jsonPath("$[0].matches[0].home", eq("Norwich")))
                 .andExpect(jsonPath("$[0].matches[0].away", eq("Sunderland")))
                 .andExpect(jsonPath("$[0].matches[0].betType", eq("Match Betting")))
-                .andExpect(jsonPath("$[0].matches[0].bets[0].outcome", eq("Norwich")))
-                .andExpect(jsonPath("$[0].matches[0].bets[0].odds", eq("11/8")))
-                .andExpect(jsonPath("$[0].matches[0].bets[0].oddsDecimal", eq(2.38)))
     }
 
     @Test
