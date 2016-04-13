@@ -14,6 +14,9 @@ spring:
       ddl-auto: validate
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
+tipsters:
+  willHillFeedUrl: http://cachepricefeeds.williamhill.com/
+
 logging.level.: INFO
 logging.level:
   io.tipsters: DEBUG

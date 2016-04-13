@@ -1,4 +1,4 @@
-package io.tipsters.oddsclient
+package io.tipsters.oddsclient.parser
 
 import io.tipsters.oddsfeedclient.parser.WillHillOddsFeedParser
 import org.hamcrest.CoreMatchers.equalTo

@@ -27,7 +27,7 @@ class WillHillOddsFeedParser constructor(val inputStream: InputStream) {
 
 /**
  * Parses the odds XML data as a stream (rather than mapping to POJO).
- * This is more efficient as the entire DOM is not loading into memory.
+ * This is more efficient as the entire DOM is not loaded into memory.
  * Not thread safe (create an instance per invocation)
  */
 internal class OddsXmlStreamHandler : DefaultHandler() {

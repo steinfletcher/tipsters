@@ -12,6 +12,9 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
+tipsters:
+  willHillFeedUrl: http://localhost:19001/
+
 logging.level.: INFO
 logging.level:
   io.tipsters: DEBUG
