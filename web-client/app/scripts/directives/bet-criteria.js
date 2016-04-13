@@ -15,7 +15,6 @@ angular.module('tipstersApp')
       link: function (scope) {
 
         scope.datashare = datashare;
-        scope.reward = 2;
         scope.targetOdds = 10;
 
         //fetch the countries and competitions available

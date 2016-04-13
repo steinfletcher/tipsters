@@ -15,6 +15,7 @@ angular.module('tipstersApp')
   .service('slipGeneration', function () {
     var api = {};
     var range = 0.5;
+    var MAX_SLIP_SIZE = 20;
 
     /**
      * Generate slip for given competitions and targetOdds
@@ -24,21 +25,40 @@ angular.module('tipstersApp')
        */
     api.generateSlip = function (competitions, targetOdds) {
       //rearrange matches into single ordered array
-      return buildSlip(returnLowestOddsArray(competitions), targetOdds);
+      var orderedMatches = returnLowestOddsArray(competitions);
+      var closestSlip = [];
+      for(var i=0; i <= MAX_SLIP_SIZE; i++){
+        var slip = buildSlip(orderedMatches, targetOdds, i);
+        closestSlip = returnMostAccurate(closestSlip, slip, targetOdds);
+      }
+
+      return closestSlip;
     };
 
-    function buildSlip(orderedMatches, targetOdds) {
+    function buildSlip(orderedMatches, targetOdds, targetLines) {
       var slip = [];
-      _.every(orderedMatches, function (match) {
+      var i = 0;
+      var higherThanTarget = false;
+      do {
         //set the selection
+        var match = orderedMatches[i];
         match.selection = findLowestOdds(match);
         slip.push(match);
         //check if target odds have been achieved
         if (api.calculateSlipOdds(slip) >= targetOdds) {
-          return false;
+          higherThanTarget = true;
+          break;
         }
-        return true;
-      });
+        i++;
+      }
+      while (i < targetLines);
+
+      if(!higherThanTarget){
+        //alter current slip still target odds have been reached
+        var remainingMatches = _.takeRight(orderedMatches, orderedMatches.length - slip.length);
+        slip = increaseSlipOdds(remainingMatches, slip, targetOdds);
+      }
+
       //check if the slip is acceptable
       if (oddsWithinRange(api.calculateSlipOdds(slip), targetOdds)) {
         return slip;
@@ -47,6 +67,33 @@ angular.module('tipstersApp')
         var refinedSlip = refineSlip(slip, targetOdds);
         return returnMostAccurate(slip, refinedSlip, targetOdds);
       }
+    }
+
+    /**
+     * increase the odds for the current slip from the remaining matches available
+     * @param remainingMatches
+     * @param slip
+     * @param targetOdds
+       * @returns {*}
+       */
+    function increaseSlipOdds(remainingMatches, slip, targetOdds){
+      var slipIndex = 0;
+      var closestRefinedSlip = slip;
+      _.every(remainingMatches, function (match) {
+        match.selection = findLowestOdds(match);
+        slip[slipIndex] = match;
+        slipIndex++;
+        //reset the index
+        if(slipIndex === (slip.length)){
+          slipIndex = 0;
+        }
+        closestRefinedSlip = returnMostAccurate(closestRefinedSlip, slip, targetOdds);
+        if (oddsWithinRange(api.calculateSlipOdds(slip), targetOdds) || api.calculateSlipOdds(slip) >= targetOdds) {
+          return false;
+        }
+        return true;
+      });
+      return closestRefinedSlip;
     }
 
     /**
