@@ -14,12 +14,11 @@ import java.util.*
 class MatchService @Autowired constructor(val oddsClient: WilliamHillClient,
                                           val matchesRepository: CompetitionRepository) {
     fun matchesByCompetitions(competitionIDs: List<UUID>): List<Competition> {
-        val request = oddsClient.matches()
-        val response = request.execute()
+        val response = oddsClient.matches().execute()
         if (response.isSuccessful) {
             val odds = WillHillOddsFeedParser(response.body().byteStream()).parse()
-            val competitionNames: List<String> = matchesRepository.findByIdIn(competitionIDs).map { c -> c.name }
 
+            val competitionNames: List<String> = matchesRepository.findByIdIn(competitionIDs).map { c -> c.name }
             if (competitionNames.isEmpty()) {
                 throw CompetitionNotFoundError("No competitions found")
             }
