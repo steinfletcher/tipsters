@@ -7,3 +7,7 @@
 3. Insert the reference data by running ```tipsters/web-server/src/test/resources/db/insert.sql```
 4. Build the executable jar ```mvn clean install```
 5. Then run ```java -jar web-server/target/web-server-1.0-SNAPSHOT.jar```
+
+### Build
+
+[Jenkins](http://52.49.153.186:8080/)
