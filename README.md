@@ -10,6 +10,3 @@
 4. Build the executable jar ```mvn clean install```
 5. Then run ```java -jar web-server/target/web-server-1.0-SNAPSHOT.jar```
 
-### Build
-
-[Jenkins](http://52.30.74.253:8080/)
