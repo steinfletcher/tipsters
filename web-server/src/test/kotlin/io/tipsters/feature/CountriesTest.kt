@@ -21,8 +21,7 @@ class CountriesTest : FeatureTest() {
         mockMvc.perform(get(endpoint))
                 .andDo(print())
                 .andExpect(jsonPath("$[0].name", eq("England")))
-                .andExpect(jsonPath("$[1].name", eq("Spain")))
-                .andExpect(jsonPath("$[2].name", eq("Germany")))
-                .andExpect(jsonPath("$[3].name", eq("France")))
+                .andExpect(jsonPath("$[1].name", eq("Scotland")))
+                .andExpect(jsonPath("$[2].name", eq("Wales")))
     }
 }
