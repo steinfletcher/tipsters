@@ -9,4 +9,5 @@
 3. Insert the reference data by running ```tipsters/web-server/src/test/resources/db/insert.sql```
 4. Build the executable jar ```mvn clean install```
 5. Then run ```java -jar web-server/target/web-server-1.0-SNAPSHOT.jar```
+6. Navigate to http://localhost:19000/api/tipsters/countries
 
