@@ -14,7 +14,7 @@ class WillHillOddsFeedParserTest {
 
         val competitions = WillHillOddsFeedParser(inputStream).parse()
 
-        val firstCompetition = competitions.competitions[0]
+        val firstCompetition = competitions[0]
         assertThat(firstCompetition.name, eq("Austrian Bundesliga"))
 
         val firstMatch = firstCompetition.matches[0]

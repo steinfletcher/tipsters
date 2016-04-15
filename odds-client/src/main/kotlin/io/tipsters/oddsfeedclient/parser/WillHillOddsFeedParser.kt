@@ -2,7 +2,6 @@ package io.tipsters.oddsfeedclient.parser
 
 import io.tipsters.oddsfeedclient.domain.Bet
 import io.tipsters.oddsfeedclient.domain.Competition
-import io.tipsters.oddsfeedclient.domain.Competitions
 import io.tipsters.oddsfeedclient.domain.Match
 import org.xml.sax.Attributes
 import org.xml.sax.helpers.DefaultHandler
@@ -15,13 +14,13 @@ import javax.xml.parsers.SAXParserFactory
  * A parser to extract odds from William Hill XML response
  */
 class WillHillOddsFeedParser constructor(val inputStream: InputStream) {
-    fun parse(): Competitions {
+    fun parse(): List<Competition> {
         val parser = SAXParserFactory.newInstance().newSAXParser()
 
         val handler = OddsXmlStreamHandler()
         parser.parse(inputStream, handler)
 
-        return handler.odds
+        return handler.competitions
     }
 }
 
@@ -40,8 +39,6 @@ internal class OddsXmlStreamHandler : DefaultHandler() {
 
     lateinit var competition: Competition
     val competitions = mutableListOf<Competition>()
-    val odds = Competitions(competitions)
-
     /**
      * Event handler for when an xml element is started
      */

@@ -1,10 +1,18 @@
 DROP TABLE IF EXISTS competitions;
 DROP TABLE IF EXISTS countries;
+DROP TABLE IF EXISTS regions;
 
-CREATE TABLE countries (
+CREATE TABLE regions (
   id   UUID PRIMARY KEY,
   name TEXT NOT NULL,
   rank INT  NOT NULL UNIQUE
+);
+
+CREATE TABLE countries (
+  id        UUID PRIMARY KEY,
+  name      TEXT                         NOT NULL,
+  region_id UUID REFERENCES regions (id) NOT NULL,
+  rank      INT                          NOT NULL UNIQUE
 );
 
 CREATE TABLE competitions (

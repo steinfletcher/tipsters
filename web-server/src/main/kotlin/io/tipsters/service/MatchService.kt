@@ -23,7 +23,7 @@ class MatchService @Autowired constructor(val oddsClient: WilliamHillClient,
                 throw CompetitionNotFoundError("No competitions found")
             }
 
-            return odds.competitions.filter { competition -> competitionNames.contains(competition.name) }
+            return odds.filter { competition -> competitionNames.contains(competition.name) }
         } else {
             throw OddsApiError("Failed to retrieve matches from upstream API")
         }

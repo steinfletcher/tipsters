@@ -23,7 +23,7 @@ class CountriesTest : FeatureTest() {
                 .andDo(print())
                 .andExpect(status().is2xxSuccessful)
                 .andExpect(jsonPath("$[0].name", eq("England")))
-                .andExpect(jsonPath("$[1].name", eq("Scotland")))
-                .andExpect(jsonPath("$[2].name", eq("Wales")))
+                .andExpect(jsonPath("$[1].name", eq("Spain")))
+                .andExpect(jsonPath("$[2].name", eq("Germany")))
     }
 }

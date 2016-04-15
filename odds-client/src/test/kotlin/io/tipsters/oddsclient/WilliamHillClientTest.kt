@@ -34,7 +34,7 @@ class WilliamHillClientTest {
         oddsApiStub.willReturnTheOddsXMLFeed()
         val matches = underTest.matches().execute()
 
-        val competitions = WillHillOddsFeedParser(matches.body().byteStream()).parse().competitions
+        val competitions = WillHillOddsFeedParser(matches.body().byteStream()).parse()
 
         assertThat(competitions[0].name, eq("Scottish Championship"))
         assertThat(competitions[0].matches[0].home, eq("Hibernian"))

@@ -13,7 +13,8 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder
 @SpringBootApplication
 open class Application {
     @Bean
-    open fun objectMapperBuilder(): Jackson2ObjectMapperBuilder = Jackson2ObjectMapperBuilder().modulesToInstall(KotlinModule(), JavaTimeModule())
+    open fun objectMapperBuilder(): Jackson2ObjectMapperBuilder =
+            Jackson2ObjectMapperBuilder().modulesToInstall(KotlinModule(), JavaTimeModule())
 
     @Bean
     open fun objectMapper(jackson2ObjectMapperBuilder: Jackson2ObjectMapperBuilder): ObjectMapper {
