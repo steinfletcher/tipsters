@@ -13,3 +13,7 @@ script: mvn test
 
 before_script:
   - psql -c "create database tipsters;" -U postgres
+
+cache:
+  directories:
+  - $HOME/.m2
