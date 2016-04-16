@@ -11,7 +11,7 @@ import javax.xml.parsers.SAXParserFactory
 /**
  * A parser to extract odds from William Hill XML response
  */
-abstract class WilliamHillOddsProvider : OddsProvider {
+abstract class WilliamHillOddsProviderTemplate : OddsProvider {
     override fun odds(competitionNames: Set<String>): List<MatchesByCompetition> {
         val response = clientRequest()
         if (response.isSuccessful) {

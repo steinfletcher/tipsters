@@ -4,7 +4,7 @@ import io.tipsters.oddsfeedclient.WilliamHillEuropeOdds
 import okhttp3.ResponseBody
 import retrofit2.Response
 
-class WilliamHillEuropeOddsProvider constructor(private val oddsUkOdds: WilliamHillEuropeOdds) : WilliamHillOddsProvider() {
+class WilliamHillEuropeOddsProvider constructor(private val oddsUkOdds: WilliamHillEuropeOdds) : WilliamHillOddsProviderTemplate() {
 
     override fun clientRequest(): Response<ResponseBody> = oddsUkOdds.matches().execute()
 
