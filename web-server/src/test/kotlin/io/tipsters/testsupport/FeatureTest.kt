@@ -31,7 +31,6 @@ abstract class FeatureTest {
         mockMvc = MockMvcBuilders.webAppContextSetup(context).build()
     }
 
-
     @After
     fun teardown() {
         oddsFeedStub.stop()

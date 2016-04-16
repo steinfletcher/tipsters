@@ -1,5 +1,8 @@
 package io.tipsters.oddsfeedclient.parser
 
+import io.tipsters.common.data.Bet
+import io.tipsters.common.data.Match
+import io.tipsters.common.data.MatchesByCompetition
 import org.xml.sax.Attributes
 import org.xml.sax.helpers.DefaultHandler
 import java.time.LocalDateTime
@@ -11,16 +14,15 @@ import java.time.format.DateTimeFormatter
  * Not thread safe (create an instance per invocation)
  */
 internal class WillHillOddsFeedParser : DefaultHandler() {
-
-    private lateinit var matches: MutableList<io.tipsters.common.data.Match>
-    private var match: io.tipsters.common.data.Match? = null
-    private lateinit var bets: MutableList<io.tipsters.common.data.Bet>
-    private lateinit var bet: io.tipsters.common.data.Bet
+    private lateinit var matches: MutableList<Match>
+    private var match: Match? = null
+    private lateinit var bets: MutableList<Bet>
+    private lateinit var bet: Bet
     private lateinit var content: String
 
-    private lateinit var competition: io.tipsters.common.data.MatchesByCompetition
+    private lateinit var competition: MatchesByCompetition
 
-    val competitions = mutableListOf<io.tipsters.common.data.MatchesByCompetition>()
+    val competitions = mutableListOf<MatchesByCompetition>()
 
     /**
      * Event handler for when an xml element is started
@@ -29,14 +31,15 @@ internal class WillHillOddsFeedParser : DefaultHandler() {
         when (qName) {
             "type" -> {
                 matches = mutableListOf()
-                competition = io.tipsters.common.data.MatchesByCompetition(attr.getValue("name"), matches)
+                val competitionName = attr.getValue("name")
+                competition = MatchesByCompetition(competitionName, matches)
             }
             "market" -> {
                 bets = mutableListOf()
                 match = extractMatchFromElement(attr)
             }
             "participant" -> {
-                bet = io.tipsters.common.data.Bet(attr.getValue("name"), attr.getValue("oddsDecimal").toFloat(), attr.getValue("odds"))
+                bet = Bet(attr.getValue("name"), attr.getValue("oddsDecimal").toFloat(), attr.getValue("odds"))
             }
             else -> {
             }
@@ -58,11 +61,11 @@ internal class WillHillOddsFeedParser : DefaultHandler() {
         content = java.lang.String.copyValueOf(ch, start, length)
     }
 
-    private fun extractMatchFromElement(attr: Attributes): io.tipsters.common.data.Match? {
+    private fun extractMatchFromElement(attr: Attributes): Match? {
         val nameAttribute = parseName(attr.getValue("name"))
         val betType = nameAttribute.second
         if (betType == "Match Betting") {
-            return io.tipsters.common.data.Match(
+            return Match(
                     home = nameAttribute.first[0],
                     away = nameAttribute.first[1],
                     betType = nameAttribute.second,

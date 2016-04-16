@@ -5,9 +5,12 @@ import io.tipsters.oddsfeedclient.WilliamHillEuropeOdds
 import io.tipsters.oddsfeedclient.WilliamHillUkOdds
 import io.tipsters.oddsfeedclient.oddsprovider.WilliamHillEuropeOddsProvider
 import io.tipsters.oddsfeedclient.oddsprovider.WilliamHillUkOddsProvider
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.core.env.Environment
 import org.springframework.stereotype.Component
 import retrofit2.Retrofit
 
@@ -25,9 +28,16 @@ class OddsProviderFactory @Autowired constructor(private val oddsProviders: Odds
 open class OddsProviderConfig {
 
     @Bean
-    open fun oddsProviders(): OddsProviders {
+    open fun oddsProviders(environment: Environment): OddsProviders {
+        val logging = HttpLoggingInterceptor()
+        logging.level = HttpLoggingInterceptor.Level.BASIC
+
+        val httpClient = OkHttpClient.Builder();
+        httpClient.addInterceptor(logging)
+
         val willHillClientBuilder = Retrofit.Builder()
-                .baseUrl("http://cachepricefeeds.williamhill.com/")
+                .baseUrl(environment.getRequiredProperty("tipsters.willHillFeedUrl"))
+                .client(httpClient.build())
                 .build();
 
         val williamHillUkClient = willHillClientBuilder.create(WilliamHillUkOdds::class.java)
