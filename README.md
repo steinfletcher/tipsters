@@ -1,7 +1,5 @@
 ## tipsters
 
-[![Build Status](http://52.30.74.253:8080/buildStatus/icon?job=tipsters)](http://52.30.74.253:8080/job/tipsters/)
-
 ### REST api
 
 1. Ensure a postgres database is installed with database name tipsters
