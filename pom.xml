@@ -11,6 +11,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>common</module>
         <module>odds-client</module>
         <module>test-support</module>
         <module>web-client</module>

@@ -1,44 +1,27 @@
 package io.tipsters.oddsfeedclient.parser
 
-import io.tipsters.oddsfeedclient.domain.Bet
-import io.tipsters.oddsfeedclient.domain.Competition
-import io.tipsters.oddsfeedclient.domain.Match
 import org.xml.sax.Attributes
 import org.xml.sax.helpers.DefaultHandler
-import java.io.InputStream
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import javax.xml.parsers.SAXParserFactory
-
-/**
- * A parser to extract odds from William Hill XML response
- */
-class WillHillOddsFeedParser constructor(val inputStream: InputStream) {
-    fun parse(): List<Competition> {
-        val parser = SAXParserFactory.newInstance().newSAXParser()
-
-        val handler = OddsXmlStreamHandler()
-        parser.parse(inputStream, handler)
-
-        return handler.competitions
-    }
-}
 
 /**
  * Parses the odds XML data as a stream (rather than mapping to POJO).
  * This is more efficient as the entire DOM is not loaded into memory.
  * Not thread safe (create an instance per invocation)
  */
-internal class OddsXmlStreamHandler : DefaultHandler() {
-    lateinit var matches: MutableList<Match>
-    var match: Match? = null
+internal class WillHillOddsFeedParser : DefaultHandler() {
 
-    lateinit var bets: MutableList<Bet>
-    lateinit var bet: Bet
-    lateinit var content: String
+    private lateinit var matches: MutableList<io.tipsters.common.data.Match>
+    private var match: io.tipsters.common.data.Match? = null
+    private lateinit var bets: MutableList<io.tipsters.common.data.Bet>
+    private lateinit var bet: io.tipsters.common.data.Bet
+    private lateinit var content: String
 
-    lateinit var competition: Competition
-    val competitions = mutableListOf<Competition>()
+    private lateinit var competition: io.tipsters.common.data.MatchesByCompetition
+
+    val competitions = mutableListOf<io.tipsters.common.data.MatchesByCompetition>()
+
     /**
      * Event handler for when an xml element is started
      */
@@ -46,14 +29,14 @@ internal class OddsXmlStreamHandler : DefaultHandler() {
         when (qName) {
             "type" -> {
                 matches = mutableListOf()
-                competition = Competition(attr.getValue("name"), matches)
+                competition = io.tipsters.common.data.MatchesByCompetition(attr.getValue("name"), matches)
             }
             "market" -> {
                 bets = mutableListOf()
                 match = extractMatchFromElement(attr)
             }
             "participant" -> {
-                bet = Bet(attr.getValue("name"), attr.getValue("oddsDecimal").toFloat(), attr.getValue("odds"))
+                bet = io.tipsters.common.data.Bet(attr.getValue("name"), attr.getValue("oddsDecimal").toFloat(), attr.getValue("odds"))
             }
             else -> {
             }
@@ -75,11 +58,11 @@ internal class OddsXmlStreamHandler : DefaultHandler() {
         content = java.lang.String.copyValueOf(ch, start, length)
     }
 
-    private fun extractMatchFromElement(attr: Attributes): Match? {
+    private fun extractMatchFromElement(attr: Attributes): io.tipsters.common.data.Match? {
         val nameAttribute = parseName(attr.getValue("name"))
         val betType = nameAttribute.second
         if (betType == "Match Betting") {
-            return Match(
+            return io.tipsters.common.data.Match(
                     home = nameAttribute.first[0],
                     away = nameAttribute.first[1],
                     betType = nameAttribute.second,

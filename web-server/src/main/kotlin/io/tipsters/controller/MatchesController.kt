@@ -1,6 +1,5 @@
 package io.tipsters.controller
 
-import io.tipsters.oddsfeedclient.domain.Competition
 import io.tipsters.service.MatchService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.RequestBody
@@ -14,7 +13,7 @@ import java.util.*
 class MatchesController @Autowired constructor(val matchService: MatchService) {
 
     @RequestMapping(method = arrayOf(POST))
-    fun matchesByCompetitions(@RequestBody request: MatchesByCompetitions): List<Competition> {
+    fun matchesByCompetitions(@RequestBody request: MatchesByCompetitions): List<io.tipsters.common.data.MatchesByCompetition> {
         return matchService.matchesByCompetitions(request.competitionIDs)
     }
 }

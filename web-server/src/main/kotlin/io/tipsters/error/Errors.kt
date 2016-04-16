@@ -1,9 +1,6 @@
 package io.tipsters.error
 
-/**
- * Base class for all application errors
- */
-open class BaseError(message: String) : RuntimeException(message)
+import io.tipsters.common.error.BaseError
 
 /**
  * Response returned by controllers when an application

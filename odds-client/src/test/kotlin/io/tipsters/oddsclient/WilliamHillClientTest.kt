@@ -1,7 +1,8 @@
 package io.tipsters.oddsclient
 
-import io.tipsters.oddsfeedclient.WilliamHillClient
-import io.tipsters.oddsfeedclient.parser.WillHillOddsFeedParser
+import io.tipsters.common.data.MatchesByCompetition
+import io.tipsters.oddsfeedclient.WilliamHillUkOdds
+import io.tipsters.oddsfeedclient.oddsprovider.WilliamHillUkOddsProvider
 import io.tipsters.testsupport.stub.WilliamHillOddsFeedStub
 import org.junit.After
 import org.junit.Assert.assertThat
@@ -17,7 +18,7 @@ class WilliamHillClientTest {
             .baseUrl("http://localhost:$port/")
             .build();
 
-    val underTest = httpClientBuilder.create(WilliamHillClient::class.java)
+    val underTest = httpClientBuilder.create(WilliamHillUkOdds::class.java)
 
     @Before
     fun setUp() {
@@ -32,11 +33,11 @@ class WilliamHillClientTest {
     @Test
     fun returnsTheOddsFeed() {
         oddsApiStub.willReturnTheOddsXMLFeed()
-        val matches = underTest.matches().execute()
 
-        val competitions = WillHillOddsFeedParser(matches.body().byteStream()).parse()
+        val oddsProvider = WilliamHillUkOddsProvider(underTest)
+        val competitions: List<MatchesByCompetition> = oddsProvider.odds(setOf("Scottish Championship"))
 
-        assertThat(competitions[0].name, eq("Scottish Championship"))
+        assertThat(competitions[0].competition, eq("Scottish Championship"))
         assertThat(competitions[0].matches[0].home, eq("Hibernian"))
         assertThat(competitions[0].matches[0].away, eq("Falkirk"))
     }

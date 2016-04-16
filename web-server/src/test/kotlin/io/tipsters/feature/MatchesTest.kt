@@ -30,7 +30,7 @@ class MatchesTest : FeatureTest() {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().is2xxSuccessful)
-                .andExpect(jsonPath("$[0].name", eq("English Premier League")))
+                .andExpect(jsonPath("$[0].competition", eq("English Premier League")))
                 .andExpect(jsonPath("$[0].matches[0].home", eq("Norwich")))
                 .andExpect(jsonPath("$[0].matches[0].away", eq("Sunderland")))
                 .andExpect(jsonPath("$[0].matches[0].betType", eq("Match Betting")))

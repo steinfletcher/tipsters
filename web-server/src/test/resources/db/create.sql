@@ -17,7 +17,7 @@ CREATE TABLE countries (
 
 CREATE TABLE competitions (
   id         UUID PRIMARY KEY,
-  name       TEXT                           NOT NULL,
+  name       TEXT                           NOT NULL UNIQUE,
   country_id UUID REFERENCES countries (id) NOT NULL,
   rank       INT                            NOT NULL,
   CONSTRAINT unique_country_rank UNIQUE (country_id, rank)

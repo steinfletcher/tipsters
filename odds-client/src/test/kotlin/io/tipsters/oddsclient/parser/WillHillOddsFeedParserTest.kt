@@ -5,17 +5,19 @@ import org.hamcrest.CoreMatchers.equalTo
 import org.junit.Assert.assertThat
 import org.junit.Test
 import java.time.LocalDateTime
+import javax.xml.parsers.SAXParserFactory
 import org.hamcrest.CoreMatchers.`is` as eq
 
 class WillHillOddsFeedParserTest {
     @Test
     fun parsesTheOddsFeedStream() {
         val inputStream = ClassLoader.getSystemResourceAsStream("euro_football_stream.xml")
+        val parser = SAXParserFactory.newInstance().newSAXParser()
+        val handler = WillHillOddsFeedParser()
+        parser.parse(inputStream, handler)
 
-        val competitions = WillHillOddsFeedParser(inputStream).parse()
-
-        val firstCompetition = competitions[0]
-        assertThat(firstCompetition.name, eq("Austrian Bundesliga"))
+        val firstCompetition = handler.competitions[0]
+        assertThat(firstCompetition.competition, eq("Austrian Bundesliga"))
 
         val firstMatch = firstCompetition.matches[0]
         assertThat(firstMatch.home, eq("Salzburg"))

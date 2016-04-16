@@ -1,10 +1,8 @@
-package io.tipsters.oddsfeedclient.domain
+package io.tipsters.common.data
 
 import java.time.LocalDateTime
 
-data class Competition(val name: String, val matches: List<Match>)
-
-data class Competitions(val competitions: List<Competition>)
+data class MatchesByCompetition(val competition: String, val matches: List<Match>)
 
 data class Bet(val outcome: String,
                val oddsDecimal: Float,
