@@ -1,5 +1,7 @@
 ## tipsters
 
+[![Build Status](https://travis-ci.org/tapatron/tipsters.svg?branch=master)](https://travis-ci.org/tapatron/tipsters)
+
 ### REST api
 
 1. Ensure a postgres database is installed with database name tipsters
