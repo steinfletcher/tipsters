@@ -13,12 +13,16 @@ import javax.xml.parsers.SAXParserFactory
  */
 abstract class WilliamHillOddsProviderTemplate : OddsProvider {
     override fun odds(competitionNames: Set<String>): List<MatchesByCompetition> {
-        val response = clientRequest()
+        val response = try {
+            clientRequest()
+        } catch (e: Exception) {
+            throw OddsProviderError("Failed to retrieve odds from upstream", e)
+        }
         if (response.isSuccessful) {
             val parser = SAXParserFactory.newInstance().newSAXParser()
             val handler = WillHillOddsFeedParser()
             parser.parse(response.body().byteStream(), handler)
-            return handler.competitions.filter { competition -> competitionNames.contains(competition.competition)}
+            return handler.competitions.filter { competition -> competitionNames.contains(competition.competition) }
         } else {
             throw OddsProviderError("Failed to retrieve odds from William Hill API")
         }

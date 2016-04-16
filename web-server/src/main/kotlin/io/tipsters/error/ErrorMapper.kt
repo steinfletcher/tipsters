@@ -2,6 +2,7 @@ package io.tipsters.error
 
 import io.tipsters.common.error.BaseError
 import io.tipsters.common.error.OddsProviderError
+import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus
  */
 @ControllerAdvice
 internal class ErrorMapper {
+    private val log = LoggerFactory.getLogger(ErrorMapper::class.java)
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -30,9 +32,10 @@ internal class ErrorMapper {
     }
 
     @ExceptionHandler
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
     @ResponseBody
     fun handleException(error: OddsProviderError): ErrorResponse {
+        log.error("${error.message}", error)
         return createResponseBody(error)
     }
 
