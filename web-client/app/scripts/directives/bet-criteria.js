@@ -43,14 +43,16 @@ angular.module('tipstersApp')
 
           var selectedComps = [];
           _.each(scope.countries, function (country) {
-            selectedComps =_.concat(selectedComps,_.filter(country.competitions, function (comp) {
+            selectedComps = _.concat(selectedComps, _.filter(country.competitions, function (comp) {
               return comp.selected === true;
             }));
           });
 
-          console.log(selectedComps);
-
-          dataRetrieval.getMatches().success(function (data) {
+          var selectedCompIds = _.map(selectedComps, function (comp) {
+            return comp.id;
+          });
+          console.log(selectedCompIds);
+          dataRetrieval.getMatches(selectedCompIds).success(function (data) {
             scope.datashare.slip = slipGeneration.generateSlip(data.competitions, scope.targetOdds);
             scope.datashare.slipOdds = slipGeneration.calculateSlipOdds(scope.datashare.slip);
           });

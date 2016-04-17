@@ -18,6 +18,9 @@ angular
     'ngTouch',
     'ui.bootstrap'
   ])
+  .constant('config',{
+    apiUrl: 'http://localhost:19000/api/tipsters'
+  })
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {

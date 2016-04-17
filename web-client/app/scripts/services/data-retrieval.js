@@ -8,7 +8,7 @@
  * Service in the tipstersApp.
  */
 angular.module('tipstersApp')
-  .service('dataRetrieval', function ($http) {
+  .service('dataRetrieval', function ($http, config) {
     var api = {};
 
     /**
@@ -16,22 +16,23 @@ angular.module('tipstersApp')
      *
      * @returns {HttpPromise}
      */
-    api.getCountries = function(){
-      return $http.get('../../resources/countries-api.json', {
-
-      });
+    api.getCountries = function () {
+      return $http.get(config.apiUrl + '/countries', {});
     };
 
 
     /**
      * get the matches for a set of selected competitions
      * @returns {HttpPromise}
-       */
-    api.getMatches = function(){
-      return $http.get('../../resources/match.json', {
-
+     */
+    api.getMatches = function (competitionIds) {
+      return $http({
+        url: config.apiUrl +'/countries',
+        method: 'POST',
+        data: {competitionIDs: competitionIds}
       });
     };
 
-    return api;
-  });
+return api;
+})
+;
