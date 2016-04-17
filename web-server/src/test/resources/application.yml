@@ -13,6 +13,10 @@ spring:
     hibernate:
       ddl-auto: create-drop
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+  cache:
+    cache-names: matchesByCompetitions
+    guava:
+      spec: maximumSize=500, expireAfterAccess=1800s
 
 tipsters:
   willHillFeedUrl: http://localhost:19001/

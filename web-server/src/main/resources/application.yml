@@ -14,7 +14,7 @@ spring:
       ddl-auto: validate
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   cache:
-    cache-names: matchesByCompetition
+    cache-names: matchesByCompetitions
     guava:
       spec: maximumSize=500, expireAfterAccess=1800s
 
