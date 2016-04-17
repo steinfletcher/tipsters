@@ -7,22 +7,10 @@ import io.tipsters.oddsfeedclient.oddsprovider.WilliamHillEuropeOddsProvider
 import io.tipsters.oddsfeedclient.oddsprovider.WilliamHillUkOddsProvider
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.env.Environment
-import org.springframework.stereotype.Component
 import retrofit2.Retrofit
-
-@Component
-class OddsProviderFactory @Autowired constructor(private val oddsProviders: OddsProviders) {
-
-    fun providersForCompetitions(competitions: Set<String>): List<OddsProvider> {
-        return oddsProviders.providers.filter {
-            provider -> provider.providesFor().union(competitions).any()
-        }
-    }
-}
 
 @Configuration
 open class OddsProviderConfig {

@@ -39,6 +39,14 @@ internal class ErrorMapper {
         return createResponseBody(error)
     }
 
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
+    @ResponseBody
+    fun handleException(error: Exception): ErrorResponse {
+        log.error("${error.message}", error)
+        return ErrorResponse("ApplicationError", "")
+    }
+
     private fun createResponseBody(error: BaseError): ErrorResponse {
         return ErrorResponse(error.javaClass.simpleName, error.message.orEmpty())
     }

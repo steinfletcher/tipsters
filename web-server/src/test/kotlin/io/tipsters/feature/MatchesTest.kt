@@ -23,7 +23,7 @@ class MatchesTest : FeatureTest() {
     fun returnsTheMatchesForTheGivenCompetitions() {
         oddsFeedStub.willReturnTheOddsXMLFeed()
         val englishPremierLeague = fromString("05c6dd65-8141-4093-827a-b05372bcbbe5")
-        val requestBody = MatchesByCompetitions(listOf(englishPremierLeague))
+        val requestBody = MatchesByCompetitions(setOf(englishPremierLeague))
 
         mockMvc.perform(post("/matches")
                 .content(jsonMapper.writeValueAsString(requestBody))
@@ -41,7 +41,7 @@ class MatchesTest : FeatureTest() {
     fun returnsNotFoundIfCompetitionIdNotFound() {
         oddsFeedStub.willReturnTheOddsXMLFeed()
         val invalidCompetition = fromString("05c6dd65-8141-4093-827a-b05372bcaaaa")
-        val requestBody = MatchesByCompetitions(listOf(invalidCompetition))
+        val requestBody = MatchesByCompetitions(setOf(invalidCompetition))
 
         mockMvc.perform(post("/matches")
                 .content(jsonMapper.writeValueAsString(requestBody))

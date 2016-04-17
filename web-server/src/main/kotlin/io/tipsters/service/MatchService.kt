@@ -1,17 +1,19 @@
 package io.tipsters.service
 
 import io.tipsters.common.data.MatchesByCompetition
-import io.tipsters.config.OddsProviderFactory
 import io.tipsters.error.CompetitionNotFoundError
 import io.tipsters.repository.CompetitionRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
-class MatchService @Autowired constructor(val oddsProviderFactory: OddsProviderFactory,
-                                          val matchesRepository: CompetitionRepository) {
-    fun matchesByCompetitions(competitionIDs: List<UUID>): List<MatchesByCompetition> {
+open class MatchService @Autowired constructor(val oddsProviderFactory: OddsProviderFactory,
+                                               val matchesRepository: CompetitionRepository) {
+
+    @Cacheable("matchesByCompetitions")
+    open fun matchesByCompetitions(competitionIDs: Set<UUID>): List<MatchesByCompetition> {
         val competitionNames: Set<String> = matchesRepository.findByIdIn(
                 competitionIDs.map { id -> id.toString() }
         )

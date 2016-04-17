@@ -11,7 +11,7 @@ spring:
     driver: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: validate
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
 tipsters:
