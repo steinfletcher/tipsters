@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter
  * This is more efficient as the entire DOM is not loaded into memory.
  * Not thread safe (create an instance per invocation)
  */
-internal class WillHillOddsFeedParser : DefaultHandler() {
+internal class WillHillOddsFeedSaxHandler : DefaultHandler() {
     private lateinit var matches: MutableList<Match>
     private var match: Match? = null
     private lateinit var bets: MutableList<Bet>
@@ -39,9 +39,12 @@ internal class WillHillOddsFeedParser : DefaultHandler() {
                 match = extractMatchFromElement(attr)
             }
             "participant" -> {
-                bet = Bet(attr.getValue("name"), attr.getValue("oddsDecimal").toFloat(), attr.getValue("odds"))
+                bet = Bet(outcome = attr.getValue("name"),
+                        oddsDecimal = attr.getValue("oddsDecimal").toFloat(),
+                        odds = attr.getValue("odds"))
             }
             else -> {
+                // do nothing
             }
         }
     }

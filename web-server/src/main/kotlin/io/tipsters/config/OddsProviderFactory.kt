@@ -38,5 +38,4 @@ open class OddsProviderConfig {
     }
 }
 
-data class OddsProviders(val providers: List<OddsProvider>)
-
+open class OddsProviders(val providers: List<OddsProvider>)

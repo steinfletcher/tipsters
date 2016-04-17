@@ -3,7 +3,7 @@ package io.tipsters.oddsfeedclient.oddsprovider
 import io.tipsters.common.data.MatchesByCompetition
 import io.tipsters.common.error.OddsProviderError
 import io.tipsters.common.oddsprovider.OddsProvider
-import io.tipsters.oddsfeedclient.parser.WillHillOddsFeedParser
+import io.tipsters.oddsfeedclient.parser.WillHillOddsFeedSaxHandler
 import okhttp3.ResponseBody
 import retrofit2.Response
 import javax.xml.parsers.SAXParserFactory
@@ -20,7 +20,7 @@ abstract class WilliamHillOddsProviderTemplate : OddsProvider {
         }
         if (response.isSuccessful) {
             val parser = SAXParserFactory.newInstance().newSAXParser()
-            val handler = WillHillOddsFeedParser()
+            val handler = WillHillOddsFeedSaxHandler()
             parser.parse(response.body().byteStream(), handler)
             return handler.competitions.filter { competition -> competitionNames.contains(competition.competition) }
         } else {

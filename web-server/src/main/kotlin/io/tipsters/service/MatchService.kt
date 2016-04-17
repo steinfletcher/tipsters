@@ -14,7 +14,7 @@ open class MatchService @Autowired constructor(val oddsProviderFactory: OddsProv
 
     @Cacheable("matchesByCompetitions")
     open fun matchesByCompetitions(competitionIDs: Set<UUID>): List<MatchesByCompetition> {
-        val competitionNames: Set<String> = matchesRepository.findByIdIn(
+        val competitionNames: Set<String> = matchesRepository.findCompetitionNamesByIdIn(
                 competitionIDs.map { id -> id.toString() }
         )
 

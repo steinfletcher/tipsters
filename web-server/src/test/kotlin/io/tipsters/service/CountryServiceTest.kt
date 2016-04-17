@@ -26,7 +26,7 @@ class CountryServiceTest {
     @Test
     fun returnsTheCountries() {
         given(countryRepository.findAll(any(Pageable::class.java)))
-                .willReturn(PageImpl(listOf(Country(name = "England"), Country(name = "Japan"))))
+                .willReturn(PageImpl(listOf(Country(name = "England", rank = 1), Country(name = "Japan", rank = 2))))
 
         val countries = underTest.countriesOrderedByPriority(limit = 2)
 

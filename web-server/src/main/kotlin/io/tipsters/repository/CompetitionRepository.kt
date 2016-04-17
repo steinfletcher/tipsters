@@ -10,5 +10,5 @@ import java.util.*
 @Repository
 interface CompetitionRepository : JpaRepository<Competition, UUID> {
     @Query(nativeQuery = true, value = "select c.name from competitions c where cast(c.id as text) in :ids")
-    fun findByIdIn(@Param("ids") ids: List<String>): Set<String>
+    fun findCompetitionNamesByIdIn(@Param("ids") ids: List<String>): Set<String>
 }

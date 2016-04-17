@@ -11,7 +11,7 @@ class WilliamHillUkOddsProvider constructor(private val oddsUkOdds: WilliamHillU
     /**
      * The competitions this provider generates odds for
      */
-    override fun providesFor(): Set<String> {
+    override fun providesCompetitions(): Set<String> {
         return setOf(
                 "English Premier League",
                 "English Premier League",

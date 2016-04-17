@@ -1,6 +1,6 @@
 package io.tipsters.oddsclient.parser
 
-import io.tipsters.oddsfeedclient.parser.WillHillOddsFeedParser
+import io.tipsters.oddsfeedclient.parser.WillHillOddsFeedSaxHandler
 import org.hamcrest.CoreMatchers.equalTo
 import org.junit.Assert.assertThat
 import org.junit.Test
@@ -13,7 +13,7 @@ class WillHillOddsFeedParserTest {
     fun parsesTheOddsFeedStream() {
         val inputStream = ClassLoader.getSystemResourceAsStream("euro_football_stream.xml")
         val parser = SAXParserFactory.newInstance().newSAXParser()
-        val handler = WillHillOddsFeedParser()
+        val handler = WillHillOddsFeedSaxHandler()
         parser.parse(inputStream, handler)
 
         val firstCompetition = handler.competitions[0]

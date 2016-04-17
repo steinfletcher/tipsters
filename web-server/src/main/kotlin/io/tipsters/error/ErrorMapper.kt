@@ -1,9 +1,9 @@
 package io.tipsters.error
 
-import io.tipsters.common.error.BaseError
 import io.tipsters.common.error.OddsProviderError
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
+import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseBody
@@ -40,6 +40,13 @@ internal class ErrorMapper {
     }
 
     @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    fun handleException(error: MethodArgumentNotValidException): ErrorResponse {
+        return ErrorResponse(error.javaClass.simpleName, error.bindingResult.allErrors.toString())
+    }
+
+    @ExceptionHandler
     @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
     @ResponseBody
     fun handleException(error: Exception): ErrorResponse {
@@ -47,7 +54,7 @@ internal class ErrorMapper {
         return ErrorResponse("ApplicationError", "")
     }
 
-    private fun createResponseBody(error: BaseError): ErrorResponse {
+    private fun createResponseBody(error: Exception): ErrorResponse {
         return ErrorResponse(error.javaClass.simpleName, error.message.orEmpty())
     }
 }

@@ -5,12 +5,18 @@ import io.tipsters.config.OddsProviders
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
+/**
+ * Provides a mechanism to get a handle on all odds providers that support the
+ * given competitions
+ */
 @Component
 class OddsProviderFactory @Autowired constructor(private val oddsProviders: OddsProviders) {
 
     fun providersForCompetitions(competitions: Set<String>): List<OddsProvider> {
         return oddsProviders.providers.filter {
-            provider -> provider.providesFor().union(competitions).any()
+            provider -> provider.providesCompetitions().any {
+                competition -> competitions.contains(competition)
+            }
         }
     }
 }
