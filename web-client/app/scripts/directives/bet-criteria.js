@@ -17,6 +17,8 @@ angular.module('tipstersApp')
         scope.datashare = datashare;
         scope.targetOdds = 10;
 
+        scope.selectedCompetitions = [];
+
         //fetch the countries and competitions available
         dataRetrieval.getCountries().success(function (data) {
           _.each(data, function (country) {
@@ -38,6 +40,16 @@ angular.module('tipstersApp')
          * Generate bet with selected values
          */
         scope.generateBet = function () {
+
+          var selectedComps = [];
+          _.each(scope.countries, function (country) {
+            selectedComps =_.concat(selectedComps,_.filter(country.competitions, function (comp) {
+              return comp.selected === true;
+            }));
+          });
+
+          console.log(selectedComps);
+
           dataRetrieval.getMatches().success(function (data) {
             scope.datashare.slip = slipGeneration.generateSlip(data.competitions, scope.targetOdds);
             scope.datashare.slipOdds = slipGeneration.calculateSlipOdds(scope.datashare.slip);

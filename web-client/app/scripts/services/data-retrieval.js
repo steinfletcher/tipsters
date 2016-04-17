@@ -17,7 +17,7 @@ angular.module('tipstersApp')
      * @returns {HttpPromise}
      */
     api.getCountries = function(){
-      return $http.get('../../resources/countries.json', {
+      return $http.get('../../resources/countries-api.json', {
 
       });
     };

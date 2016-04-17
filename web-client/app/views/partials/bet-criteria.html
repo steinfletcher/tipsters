@@ -1,9 +1,11 @@
 <div class="row">
-  <div class="col-md-6" ng-repeat="country in countries">
-    <button type="button" class="btn ink-reaction btn-raised" ng-class="country.competitions[0].selected ? 'btn-success' : 'btn-primary'"
-            ng-click="competitionClicked(country.competitions[0])">
-      {{country.competitions[0].name}}
-    </button>
+  <div ng-repeat="country in countries">
+    <div class="col-md-6" ng-repeat="competition in country.competitions">
+      <button type="button" class="btn ink-reaction btn-raised" ng-class="competition.selected ? 'btn-success' : 'btn-primary'"
+              ng-click="competitionClicked(competition)">
+        {{competition.name}}
+      </button>
+    </div>
   </div>
 </div>
 <br />

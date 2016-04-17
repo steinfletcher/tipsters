@@ -7,7 +7,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/tipsters
     username: postgres
-    password: postgres
+    password: root
     driver: org.postgresql.Driver
   jpa:
     hibernate:
