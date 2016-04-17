@@ -53,7 +53,8 @@ angular.module('tipstersApp')
           });
           console.log(selectedCompIds);
           dataRetrieval.getMatches(selectedCompIds).success(function (data) {
-            scope.datashare.slip = slipGeneration.generateSlip(data.competitions, scope.targetOdds);
+            console.log(data);
+            scope.datashare.slip = slipGeneration.generateSlip(data, scope.targetOdds);
             scope.datashare.slipOdds = slipGeneration.calculateSlipOdds(scope.datashare.slip);
           });
         };

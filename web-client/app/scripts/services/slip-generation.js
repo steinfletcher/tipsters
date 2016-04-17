@@ -14,8 +14,8 @@
 angular.module('tipstersApp')
   .service('slipGeneration', function () {
     var api = {};
-    var range = 0.5;
-    var MAX_SLIP_SIZE = 20;
+    var range = 0.1;
+    var MAX_SLIP_SIZE = 60;
 
     /**
      * Generate slip for given competitions and targetOdds

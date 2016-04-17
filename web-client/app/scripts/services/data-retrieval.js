@@ -17,7 +17,7 @@ angular.module('tipstersApp')
      * @returns {HttpPromise}
      */
     api.getCountries = function () {
-      return $http.get(config.apiUrl + '/countries', {});
+      return $http.get(config.apiUrl + '/countries?limit=4', {});
     };
 
 
@@ -27,7 +27,7 @@ angular.module('tipstersApp')
      */
     api.getMatches = function (competitionIds) {
       return $http({
-        url: config.apiUrl +'/countries',
+        url: config.apiUrl +'/matches',
         method: 'POST',
         data: {competitionIDs: competitionIds}
       });
