@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,600,400italic,300);
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -6,6 +8,7 @@
 }
 
 body {
+  font-family: 'Source Sans Pro', sans-serif;
   padding: 0;
 }
 
@@ -22,6 +25,7 @@ body {
   border-bottom: 1px solid #e5e5e5;
   margin-bottom: 10px;
 }
+
 /* Make the masthead heading the same height as the navigation */
 .header h3 {
   margin-top: 0;
@@ -46,6 +50,7 @@ body {
   text-align: center;
   border-bottom: 1px solid #e5e5e5;
 }
+
 .jumbotron .btn {
   font-size: 21px;
   padding: 14px 24px;
@@ -55,6 +60,7 @@ body {
 .marketing {
   margin: 40px 0;
 }
+
 .marketing p + h4 {
   margin-top: 28px;
 }
@@ -72,12 +78,55 @@ body {
     padding-left: 0;
     padding-right: 0;
   }
+
   /* Space out the masthead */
   .header {
     margin-bottom: 30px;
   }
+
   /* Remove the bottom border on the jumbotron for visual effect */
   .jumbotron {
     border-bottom: 0;
   }
+}
+
+/* Home page card styles */
+.card-col-info {
+  background-color: rgb(72,72,96) !important;
+  border-color: rgb(72,72,96) !important;
+  color: white !important;
+}
+.card-col-info:hover {
+  background-color: rgba(72,72,96, .9) !important;
+  cursor: pointer;
+}
+
+.card-col-alt {
+  background-color: rgb(120,120,120) !important;
+  border-color: rgb(120,120,120) !important;
+  color: white !important;
+}
+.card-col-alt:hover {
+  background-color: rgba(120,120,120, .9) !important;
+  cursor: pointer;
+}
+
+.card-col-danger {
+  background-color: rgb(168,120,120) !important;
+  border-color: rgb(168,120,120) !important;
+  color: white !important;
+}
+.card-col-danger:hover {
+  background-color: rgba(168,120,120, .9) !important;
+  cursor: pointer;
+}
+
+.card-col-hl {
+  background-color: rgb(144,96,120) !important;
+  border-color: rgb(144,96,120) !important;
+  color: white !important;
+}
+.card-col-hl:hover {
+  background-color: rgba(144,96,120, .9) !important;
+  cursor: pointer;
 }
