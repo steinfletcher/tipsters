@@ -33,6 +33,15 @@ angular.module('tipstersApp')
       });
     };
 
+
+    /**
+     * get categories
+     * @returns {*}
+       */
+    api.getCategories = function () {
+      return $http.get('../../resources/categories.json', {});
+    };
+
 return api;
 })
 ;

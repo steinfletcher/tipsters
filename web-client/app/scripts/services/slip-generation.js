@@ -15,19 +15,19 @@ angular.module('tipstersApp')
   .service('slipGeneration', function () {
     var api = {};
     var range = 0.1;
-    var MAX_SLIP_SIZE = 60;
+    var MAX_SLIP_SIZE = 20;
 
     /**
      * Generate slip for given competitions and targetOdds
      * @param competitions
      * @param targetOdds
      * @returns {*}
-       */
+     */
     api.generateSlip = function (competitions, targetOdds) {
       //rearrange matches into single ordered array
       var orderedMatches = returnLowestOddsArray(competitions);
       var closestSlip = [];
-      for(var i=0; i <= MAX_SLIP_SIZE; i++){
+      for (var i = 3; i <= MAX_SLIP_SIZE; i++) {
         var slip = buildSlip(orderedMatches, targetOdds, i);
         closestSlip = returnMostAccurate(closestSlip, slip, targetOdds);
       }
@@ -42,18 +42,20 @@ angular.module('tipstersApp')
       do {
         //set the selection
         var match = orderedMatches[i];
-        match.selection = findLowestOdds(match);
-        slip.push(match);
-        //check if target odds have been achieved
-        if (api.calculateSlipOdds(slip) >= targetOdds) {
-          higherThanTarget = true;
-          break;
+        if (!_.isUndefined(match)) {
+          match.selection = findLowestOdds(match);
+          slip.push(match);
+          //check if target odds have been achieved
+          if (api.calculateSlipOdds(slip) >= targetOdds) {
+            higherThanTarget = true;
+            break;
+          }
         }
         i++;
       }
       while (i < targetLines);
 
-      if(!higherThanTarget){
+      if (!higherThanTarget) {
         //alter current slip still target odds have been reached
         var remainingMatches = _.takeRight(orderedMatches, orderedMatches.length - slip.length);
         slip = increaseSlipOdds(remainingMatches, slip, targetOdds);
@@ -74,9 +76,9 @@ angular.module('tipstersApp')
      * @param remainingMatches
      * @param slip
      * @param targetOdds
-       * @returns {*}
-       */
-    function increaseSlipOdds(remainingMatches, slip, targetOdds){
+     * @returns {*}
+     */
+    function increaseSlipOdds(remainingMatches, slip, targetOdds) {
       var slipIndex = 0;
       var closestRefinedSlip = slip;
       _.every(remainingMatches, function (match) {
@@ -84,7 +86,7 @@ angular.module('tipstersApp')
         slip[slipIndex] = match;
         slipIndex++;
         //reset the index
-        if(slipIndex === (slip.length)){
+        if (slipIndex === (slip.length)) {
           slipIndex = 0;
         }
         closestRefinedSlip = returnMostAccurate(closestRefinedSlip, slip, targetOdds);
@@ -101,7 +103,7 @@ angular.module('tipstersApp')
      * @param slip
      * @param targetOdds
      * @returns {*}
-       */
+     */
     function refineSlip(slip, targetOdds) {
       var closestRefinedSlip = slip;
       _.every(slip, function (match) {
@@ -154,7 +156,7 @@ angular.module('tipstersApp')
      * @param slip
      * @returns {number}
      */
-    api.calculateSlipOdds = function(slip) {
+    api.calculateSlipOdds = function (slip) {
       var odds = 1;
       _.each(slip, function (match) {
         odds *= findLowestOdds(match).oddsDecimal;

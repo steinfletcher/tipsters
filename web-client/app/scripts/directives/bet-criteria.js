@@ -51,9 +51,8 @@ angular.module('tipstersApp')
           var selectedCompIds = _.map(selectedComps, function (comp) {
             return comp.id;
           });
-          console.log(selectedCompIds);
+
           dataRetrieval.getMatches(selectedCompIds).success(function (data) {
-            console.log(data);
             scope.datashare.slip = slipGeneration.generateSlip(data, scope.targetOdds);
             scope.datashare.slipOdds = slipGeneration.calculateSlipOdds(scope.datashare.slip);
           });

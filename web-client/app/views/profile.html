@@ -1,9 +1,51 @@
 <div>
   <section>
     <div class="section-body contain-lg">
-
       <h1>{{page}}</h1>
 
+      <h3> Slip Odds: {{slipOdds}}</h3>
+      <h3> Total lines: {{slip.length}}</h3>
+
+      <br />
+      <br />
+
+      <div class="row">
+        <div class="col-sm-2">
+          <button type="button" class="btn ink-reaction btn-raised btn-primary" ng-click="generateSlip(250000)">Moonshot</button>
+        </div>
+        <div class="col-sm-2">
+          <button type="button" class="btn ink-reaction btn-raised btn-primary" ng-click="generateSlip(5000)">Holiday</button>
+        </div>
+        <div class="col-sm-2">
+          <button type="button" class="btn ink-reaction btn-raised btn-primary" ng-click="generateSlip(100)">Night Out</button>
+        </div>
+        <div class="col-sm-2">
+          <button type="button" class="btn ink-reaction btn-raised btn-primary" ng-click="generateSlip(20)">Drinks On Me</button>
+        </div>
+        <div class="col-sm-2">
+          <button type="button" class="btn ink-reaction btn-raised btn-primary" ng-click="generateSlip(2)">Double Up</button>
+        </div>
+      </div>
+      <br />
+      <br />
+
+      <div class="row" ng-repeat="match in slip">
+        <div class="col-sm-3" ng-class="(match.home == match.selection.outcome) ? 'text-ultra-bold' : ''">
+          {{match.home}}
+        </div>
+        <div class="col-sm-1">
+          VS
+        </div>
+        <div class="col-sm-3" ng-class="(match.away == match.selection.outcome) ? 'text-ultra-bold' : ''">
+          {{match.away}}
+        </div>
+        <div class="col-sm-1">
+          {{match.date}}
+        </div>
+        <div class="col-sm-2">
+          <b> {{match.selection.oddsDecimal}}</b>
+        </div>
+      </div>
     </div>
   </section>
 </div>

@@ -1,0 +1,27 @@
+[
+  {
+    "name": "european-elite",
+    "competitionIDs": [
+      "05c6dd65-8141-4093-827a-b05372bcbbe5",
+      "3a99b0a1-f8dc-44f9-97d0-fca1a984c8a9",
+      "02d3a983-ae9d-4163-a5b9-0564b01e1c41",
+      "2464dd3b-4ce1-4d7c-8c65-3f69e6f55a2a"
+    ]
+  },
+  {
+    "name": "domestic",
+    "competitionIDs": [
+      "05c6dd65-8141-4093-827a-b05372bcbbe5",
+      "245c927b-b02e-4a6f-965e-7930559382ae",
+      "d00825a2-c389-47b6-8e89-2e37086f5fd7"
+    ]
+  },
+  {
+    "name": "grass-roots",
+    "competitionIDs": [
+      "c534edcf-4f6f-4b9c-9da4-3629455f7623",
+      "b0a6f611-116a-4e24-8d1c-8e7a7cbd7041",
+      "d00825a2-c389-47b6-8e89-2e37086f5fd7"
+    ]
+  }
+]
