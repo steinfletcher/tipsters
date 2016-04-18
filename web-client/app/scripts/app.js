@@ -23,9 +23,8 @@ angular
   })
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/dev', {
+      .when('/old', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
         controllerAs: 'main'
       })
       .when('/', {
@@ -35,11 +34,6 @@ angular
       .when('/profile/:type', {
         templateUrl: 'views/profile.html',
         controller: 'ProfileCtrl'
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
       })
       .otherwise({
         redirectTo: '/'
