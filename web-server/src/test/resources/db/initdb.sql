@@ -1,3 +1,35 @@
+
+-- Cleanup
+
+DROP TABLE IF EXISTS competitions;
+DROP TABLE IF EXISTS countries;
+DROP TABLE IF EXISTS regions;
+
+-- Schema
+
+CREATE TABLE regions (
+  id   UUID PRIMARY KEY,
+  name TEXT NOT NULL,
+  rank INT  NOT NULL UNIQUE
+);
+
+CREATE TABLE countries (
+  id        UUID PRIMARY KEY,
+  name      TEXT                         NOT NULL,
+  region_id UUID REFERENCES regions (id) NOT NULL,
+  rank      INT                          NOT NULL UNIQUE
+);
+
+CREATE TABLE competitions (
+  id         UUID PRIMARY KEY,
+  name       TEXT                           NOT NULL UNIQUE,
+  country_id UUID REFERENCES countries (id) NOT NULL,
+  rank       INT                            NOT NULL,
+  CONSTRAINT unique_country_rank UNIQUE (country_id, rank)
+);
+
+-- Reference Data
+
 INSERT INTO regions (id, name, rank) VALUES
   ('70d525cb-2845-4ae0-9cc9-5d189f847e28', 'UK', 1),
   ('0d349532-6b22-45c3-9894-f85b53f0d90e', 'European Major Leagues', 2);

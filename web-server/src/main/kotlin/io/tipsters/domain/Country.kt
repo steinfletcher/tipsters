@@ -8,6 +8,7 @@ class Country(
         var name: String = "",
         var rank: Int = 0,
         @OneToMany(fetch = FetchType.LAZY, cascade = arrayOf(CascadeType.ALL), mappedBy = "country")
-            var competitions: List<Competition> = arrayListOf()
+            var competitions: List<Competition> = arrayListOf(),
+        @ManyToOne(fetch = FetchType.EAGER) var region: Region = Region()
 ) : BaseEntity() {
 }

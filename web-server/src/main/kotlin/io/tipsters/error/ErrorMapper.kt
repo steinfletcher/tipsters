@@ -3,6 +3,7 @@ package io.tipsters.error
 import io.tipsters.common.error.OddsProviderError
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
+import org.springframework.http.converter.HttpMessageNotReadableException
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
@@ -43,7 +44,14 @@ internal class ErrorMapper {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     fun handleException(error: MethodArgumentNotValidException): ErrorResponse {
-        return ErrorResponse(error.javaClass.simpleName, error.bindingResult.allErrors.toString())
+        return ErrorResponse("ValidationError", error.message ?: "")
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    fun handleException(error: HttpMessageNotReadableException): ErrorResponse {
+        return ErrorResponse(error.javaClass.simpleName, "Invalid request attributes")
     }
 
     private fun createResponseBody(error: Exception): ErrorResponse {

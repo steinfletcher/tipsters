@@ -11,3 +11,19 @@
 5. Then run ```java -jar web-server/target/web-server-1.0-SNAPSHOT.jar```
 6. Navigate to ```http://localhost:19000/api/tipsters/countries```
 
+### Run stack using docker compose
+
+***In progress***
+
+So far built web-server and database builds, need to do the client container.
+
+* web-server  ```docker build -t tipsters/tipsters-api .```
+* db ```docker build -t tipsters/db .```
+* web-client
+
+```docker run --net=host -p 127.0.0.0:5432:5432 --name db tipsters/db```
+
+```docker run --net=host -p 19000:19000 --name api tipsters/tipsters-api```
+
+[Replace above with compose]
+

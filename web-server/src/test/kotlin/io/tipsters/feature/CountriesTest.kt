@@ -11,7 +11,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.hamcrest.CoreMatchers.`is` as eq
 
 @SqlGroup(Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD,
-        scripts = arrayOf("classpath:db/create.sql", "classpath:db/insert.sql")))
+        scripts = arrayOf("classpath:db/initdb.sql")))
 class CountriesTest : FeatureTest() {
 
     @Test

@@ -106,6 +106,7 @@
                 <configuration>
                     <executable>true</executable>
                     <mainClass>io.tipsters.ApplicationKt</mainClass>
+                    <finalName>tipsters-api</finalName>
                 </configuration>
                 <executions>
                     <execution>
