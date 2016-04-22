@@ -12,11 +12,14 @@ angular
   .controller('ProfileCtrl', function ($routeParams, $scope, dataRetrieval, slipGeneration) {
     $scope.page = $routeParams.type;
 
+    $scope.targetOdds = 100;
+
     dataRetrieval.getCategories().success(function (categories) {
       $scope.category = _.find(categories, ['name', $scope.page]);
+      console.log($scope.category.competitionIDs);
       dataRetrieval.getMatches($scope.category.competitionIDs).success(function (data) {
         $scope.matches = data;
-        $scope.generateSlip(100);
+        $scope.generateSlip($scope.targetOdds);
       });
     });
 
@@ -26,6 +29,7 @@ angular
      * @returns {*}
      */
     $scope.generateSlip = function (targetOdds) {
+      $scope.targetOdds = targetOdds;
       $scope.slip = slipGeneration.generateSlip($scope.matches, targetOdds);
       $scope.slipOdds = slipGeneration.calculateSlipOdds($scope.slip);
     };

@@ -20,7 +20,7 @@ angular.module('tipstersApp')
         scope.selectedCompetitions = [];
 
         //fetch the countries and competitions available
-        dataRetrieval.getCountries().success(function (data) {
+        dataRetrieval.getCountries(100).success(function (data) {
           _.each(data, function (country) {
             _.each(country.competitions, function (competition) {
               competition.selected = false;

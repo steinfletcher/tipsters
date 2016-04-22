@@ -16,8 +16,8 @@ angular.module('tipstersApp')
      *
      * @returns {HttpPromise}
      */
-    api.getCountries = function () {
-      return $http.get(config.apiUrl + '/countries?limit=4', {});
+    api.getCountries = function (limit) {
+      return $http.get(config.apiUrl + '/countries?limit=' + limit, {});
     };
 
 

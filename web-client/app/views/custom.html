@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <div class="row">
+    <div  class="col-md-12">
+      <h3> Select Leagues</h3>
+      <div ng-repeat="country in countries">
+        <div class="col-md-6" ng-repeat="competition in country.competitions">
+          <button type="button" class="btn ink-reaction btn-raised" ng-class="competition.selected ? 'btn-success' : 'btn-primary'"
+                  ng-click="competitionClicked(competition)">
+            {{competition.name}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div  class="col-md-12">
+      <h3> Enter Odds</h3>
+      <div class="col-sm-2">
+        <button type="button" class="btn ink-reaction btn-raised btn-primary" ng-click="generateSlip(250000)">Moonshot</button>
+      </div>
+      <div class="col-sm-2">
+        <button type="button" class="btn ink-reaction btn-raised btn-primary" ng-click="generateSlip(5000)">Holiday</button>
+      </div>
+      <div class="col-sm-2">
+        <button type="button" class="btn ink-reaction btn-raised btn-primary" ng-click="generateSlip(100)">Night Out</button>
+      </div>
+      <div class="col-sm-2">
+        <button type="button" class="btn ink-reaction btn-raised btn-primary" ng-click="generateSlip(20)">Drinks On Me</button>
+      </div>
+      <div class="col-sm-2">
+        <button type="button" class="btn ink-reaction btn-raised btn-primary" ng-click="generateSlip(2)">Double Up</button>
+      </div>
+    </div>
+    <div class="col-md-6 col-md-offset-3">
+      <div>
+        <br />
+        <label for="customOdds">Target odds</label>
+        <input type="text"  id="customOdds" ng-model="targetOdds" ng-change="customOddsChanged()">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div  class="col-md-10 col-md-offset-2">
+      <h3> Bet Slip</h3>
+
+      <h4> Slip Odds: {{slipOdds}}</h4>
+      <h4> Total lines: {{slip.length}}</h4>
+
+      <div class="row" ng-repeat="match in slip">
+        <div class="col-sm-3" ng-class="(match.home == match.selection.outcome) ? 'text-ultra-bold' : ''">
+          {{match.home}}
+        </div>
+        <div class="col-sm-1">
+          VS
+        </div>
+        <div class="col-sm-3" ng-class="(match.away == match.selection.outcome) ? 'text-ultra-bold' : ''">
+          {{match.away}}
+        </div>
+        <div class="col-sm-1">
+          {{match.date}}
+        </div>
+        <div class="col-sm-2">
+          <b> {{match.selection.oddsDecimal}}</b>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

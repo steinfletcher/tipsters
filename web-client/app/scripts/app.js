@@ -35,6 +35,10 @@ angular
         templateUrl: 'views/profile.html',
         controller: 'ProfileCtrl'
       })
+      .when('/custom', {
+        templateUrl: 'views/custom.html',
+        controller: 'CustomCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
