@@ -134,3 +134,7 @@ body {
 .row-centered {
   text-align:center;
 }
+
+span.line {
+  display: inline-block;
+}

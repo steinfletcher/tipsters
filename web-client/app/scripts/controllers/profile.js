@@ -28,7 +28,7 @@ angular
      */
     $scope.generateSlip = function (targetOdds, label, style) {
       $scope.selectedTipStyle = style;
-      $scope.slipLabel = label; 
+      $scope.slipLabel = label;
       $scope.targetOdds = targetOdds;
       $scope.slip = slipGeneration.generateSlip($scope.matches, targetOdds);
       $scope.slipOdds = slipGeneration.calculateSlipOdds($scope.slip);
