@@ -1,49 +1,103 @@
 <div>
-  <section>
-    <div class="section-body contain-lg">
-      <h1>{{page}}</h1>
-
-      <h3> Slip Odds: {{slipOdds}}</h3>
-      <h3> Total lines: {{slip.length}}</h3>
-
-      <br />
-      <br />
-
+  <section ng-show="slipOdds">
+    <div class="section-body contain-lg ">
       <div class="row">
-        <div class="col-sm-2">
-          <button type="button" class="btn ink-reaction btn-raised btn-primary" ng-click="generateSlip(250000)">Moonshot</button>
+        <div class="col-sm-2 col-xm-1 col-sm-offset-1 col-xm-offset-1 row-centered">
+          <button type="button" class="btn ink-reaction style-default-dark"
+                  ng-click="generateSlip(250000, 'Moonshot', 'style-default-dark')">
+            <i class="fa fa-star"> </i> <span> Moonshot </span>
+          </button>
         </div>
-        <div class="col-sm-2">
-          <button type="button" class="btn ink-reaction btn-raised btn-primary" ng-click="generateSlip(5000)">Holiday</button>
+        <div class="col-sm-2 col-xm-1 row-centered">
+          <button type="button" class="btn ink-reaction style-warning "
+                  ng-click="generateSlip(5000, 'Holiday', 'style-warning')">
+            <i class="fa fa-plane"> </i> <span> Holiday </span>
+          </button>
         </div>
-        <div class="col-sm-2">
-          <button type="button" class="btn ink-reaction btn-raised btn-primary" ng-click="generateSlip(100)">Night Out</button>
+        <div class="col-sm-2 col-xm-1 row-centered">
+          <button type="button" class="btn ink-reaction style-primary"
+                  ng-click="generateSlip(100, 'Night Out', 'style-primary')"><i
+            class="fa fa-cutlery"> </i> <span> Night Out </span>
+          </button>
         </div>
-        <div class="col-sm-2">
-          <button type="button" class="btn ink-reaction btn-raised btn-primary" ng-click="generateSlip(20)">Drinks On Me</button>
+        <div class="col-sm-2 col-xm-1 row-centered">
+          <button type="button" class="btn ink-reaction style-info "
+                  ng-click="generateSlip(20, 'Drinks On Me', 'style-info')"><i
+            class="fa fa-beer"> </i> <span> Drinks On Me </span>
+          </button>
         </div>
-        <div class="col-sm-2">
-          <button type="button" class="btn ink-reaction btn-raised btn-primary" ng-click="generateSlip(2)">Double Up</button>
+        <div class="col-sm-2 col-xm-1 row-centered">
+          <button type="button" class="btn ink-reaction style-success"
+                  ng-click="generateSlip(2, 'Double Up', 'style-success')"><i
+            class="fa fa-angle-double-up"> </i> <span> Double Up </span>
+          </button>
         </div>
       </div>
-      <br />
-      <br />
+      <br/>
+      <div class="card card-bordered" style="margin-bottom: 0px" ng-class="selectedTipStyle">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-7 col-xs-7">
+              <p class="text-lg">
+                <b> Place bet before: </b> {{firstBetDate | date:'EEE MMM d, h:mm a'}} <br/>
+                <b>Receive Winnings: </b> {{firstBetDate | date:'EEE MMM d, h:mm a'}} <br/>
+                <b> Number of lines:</b> {{slip.length}}
+              </p>
+            </div>
+            <div class="col-sm-5 col-xs-5 ">
+              <p class="text-xxxl">
+                £1 wins £{{slipOdds| number:0}}
+              </p>
+              <small> Based on current odds offered by William Hill </small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="margin-bottom: 0px">
+          <div class="nano-content" tabindex="0" style="right: -17px;">
+            <div class="card-body height-6 scroll style-default-bright text-lg" style="height: auto;">
 
-      <div class="row" ng-repeat="match in slip">
-        <div class="col-sm-3" ng-class="(match.home == match.selection.outcome) ? 'text-ultra-bold' : ''">
-          {{match.home}}
-        </div>
-        <div class="col-sm-1">
-          VS
-        </div>
-        <div class="col-sm-3" ng-class="(match.away == match.selection.outcome) ? 'text-ultra-bold' : ''">
-          {{match.away}}
-        </div>
-        <div class="col-sm-1">
-          {{match.date}}
-        </div>
-        <div class="col-sm-2">
-          <b> {{match.selection.oddsDecimal}}</b>
+              <div class="row " ng-repeat="match in slip">
+                <div class="col-sm-3 col-xs-3 row-centered" ng-class="(match.home == match.selection.outcome) ? selectedTipStyle : ''">
+                  {{match.home}}
+                </div>
+                <div class="col-sm-4 col-xs-4">
+                  <div class="row">
+                    <div class="row-centered">
+                      VS
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="row-centered">
+                      <small>{{match.date | date:'EEE MMM d, h:mm a'}}</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3 col-xs-3 row-centered"
+                     ng-class="(match.away == match.selection.outcome) ? selectedTipStyle : ''">
+                  {{match.away}}
+                </div>
+                <div class="col-sm-2 col-xs-2">
+                  <b> {{match.selection.oddsDecimal}}</b>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="card card-bordered" ng-class="selectedTipStyle">
+        <div class="card-body">
+          <p class="text-lg"><b> Place bet with: </b></p>
+          <div class="row">
+            <div class="col-sm-4 col-xs-4 row-centered ">
+              <button type="button" class="btn ink-reaction btn-flat btn-lg btn-primary">William Hill</button>
+            </div>
+            <div class="col-sm-4 col-xs-4 row-centered ">
+              <button type="button" class="btn ink-reaction btn-flat btn-lg btn-primary">Betfair</button>
+            </div>
+            <div class="col-sm-4 col-xs-4 row-centered ">
+              <button type="button" class="btn ink-reaction btn-flat btn-lg btn-primary">Skybet</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

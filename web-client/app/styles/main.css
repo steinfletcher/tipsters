@@ -130,3 +130,7 @@ body {
   background-color: rgba(144,96,120, .9) !important;
   cursor: pointer;
 }
+
+.row-centered {
+  text-align:center;
+}

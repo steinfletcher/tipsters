@@ -19,7 +19,7 @@ angular
     'ui.bootstrap'
   ])
   .constant('config',{
-    apiUrl: 'http://localhost:19000/api/tipsters'
+    apiUrl: 'http://52.18.221.2:19000/api/tipsters'
   })
   .config(function ($routeProvider) {
     $routeProvider
