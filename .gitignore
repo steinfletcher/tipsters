@@ -120,3 +120,5 @@ target/
 
 # Code Recommenders
 .recommenders/
+
+.DS_Store
