@@ -1,5 +1,41 @@
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,600,400italic,300);
 
+/* background for striped slip */
+
+.background-white {
+  background: rgba(255, 255, 255, 1) !important;
+}
+
+.background-default-dark {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.background-warning {
+ background: rgba(255, 152, 0, 0.1);
+}
+
+.background-primary {
+ background: rgba(10, 168, 158, 0.1);
+}
+
+.background-info {
+ background: rgba(33, 150, 243, 0.1);
+}
+
+.background-success {
+ background: rgba(76, 175, 80, 0.1);
+}
+
+.background-selected {
+  background: rgba(144, 149, 217, 0.06);
+}
+
+
+
+.font-bold {
+  font-weight: bold;
+}
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -92,47 +128,51 @@ body {
 
 /* Home page card styles */
 .card-col-info {
-  background-color: rgb(72,72,96) !important;
-  border-color: rgb(72,72,96) !important;
+  background-color: rgb(72, 72, 96) !important;
+  border-color: rgb(72, 72, 96) !important;
   color: white !important;
 }
+
 .card-col-info:hover {
-  background-color: rgba(72,72,96, .9) !important;
+  background-color: rgba(72, 72, 96, .9) !important;
   cursor: pointer;
 }
 
 .card-col-alt {
-  background-color: rgb(120,120,120) !important;
-  border-color: rgb(120,120,120) !important;
+  background-color: rgb(120, 120, 120) !important;
+  border-color: rgb(120, 120, 120) !important;
   color: white !important;
 }
+
 .card-col-alt:hover {
-  background-color: rgba(120,120,120, .9) !important;
+  background-color: rgba(120, 120, 120, .9) !important;
   cursor: pointer;
 }
 
 .card-col-danger {
-  background-color: rgb(168,120,120) !important;
-  border-color: rgb(168,120,120) !important;
+  background-color: rgb(168, 120, 120) !important;
+  border-color: rgb(168, 120, 120) !important;
   color: white !important;
 }
+
 .card-col-danger:hover {
-  background-color: rgba(168,120,120, .9) !important;
+  background-color: rgba(168, 120, 120, .9) !important;
   cursor: pointer;
 }
 
 .card-col-hl {
-  background-color: rgb(144,96,120) !important;
-  border-color: rgb(144,96,120) !important;
+  background-color: rgb(144, 96, 120) !important;
+  border-color: rgb(144, 96, 120) !important;
   color: white !important;
 }
+
 .card-col-hl:hover {
-  background-color: rgba(144,96,120, .9) !important;
+  background-color: rgba(144, 96, 120, .9) !important;
   cursor: pointer;
 }
 
 .row-centered {
-  text-align:center;
+  text-align: center;
 }
 
 span.line {

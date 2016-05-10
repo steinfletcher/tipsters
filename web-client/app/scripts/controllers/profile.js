@@ -17,7 +17,7 @@ angular
       $scope.category = _.find(categories, ['name', $scope.page]);
       dataRetrieval.getMatches($scope.category.competitionIDs).success(function (data) {
         $scope.matches = data;
-        $scope.generateSlip($scope.targetOdds, 'Night Out', 'style-primary');
+        $scope.generateSlip($scope.targetOdds, 'Night Out', 'primary');
       });
     });
 
@@ -27,7 +27,8 @@ angular
      * @returns {*}
      */
     $scope.generateSlip = function (targetOdds, label, style) {
-      $scope.selectedTipStyle = style;
+      $scope.selectedTipStyle = 'style-' + style;
+      $scope.selectedTipFont = 'text-' + style;
       $scope.slipLabel = label;
       $scope.targetOdds = targetOdds;
       $scope.slip = slipGeneration.generateSlip($scope.matches, targetOdds);
