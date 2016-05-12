@@ -1,0 +1,94 @@
+<section ng-show="slipOdds">
+  <div class="section-body contain-lg">
+    <div class="row">
+      <div class="col-sm-2 col-xs-2 col-sm-offset-1 col-xs-offset-1 row-centered">
+        <button type="button" class="btn ink-reaction style-default-dark"
+                ng-click="generateSlip(250000, 'Moonshot', 'default-dark')">
+          <i class="fa fa-star"> </i> <span class="hidden-xs"> Moonshot </span>
+        </button>
+      </div>
+      <div class="col-sm-2 col-xs-2 row-centered">
+        <button type="button" class="btn ink-reaction style-warning "
+                ng-click="generateSlip(5000, 'Holiday', 'warning')">
+          <i class="fa fa-plane"> </i> <span class="hidden-xs"> Holiday </span>
+        </button>
+      </div>
+      <div class="col-sm-2 col-xs-2 row-centered">
+        <button type="button" class="btn ink-reaction style-primary"
+                ng-click="generateSlip(100, 'Night Out', 'primary')"><i
+          class="fa fa-cutlery"> </i> <span class="hidden-xs"> Night Out </span>
+        </button>
+      </div>
+      <div class="col-sm-2 col-xs-2 row-centered">
+        <button type="button" class="btn ink-reaction style-info "
+                ng-click="generateSlip(20, 'Drinks On Me', 'info')"><i
+          class="fa fa-beer"> </i> <span class="hidden-xs"> Drinks On Me </span>
+        </button>
+      </div>
+      <div class="col-sm-2 col-xs-2 row-centered">
+        <button type="button" class="btn ink-reaction style-success"
+                ng-click="generateSlip(2, 'Double Up', 'success')"><i
+          class="fa fa-angle-double-up"> </i> <span class="hidden-xs"> Double</span>
+        </button>
+      </div>
+    </div>
+    <br/>
+
+    <div class="card card-bordered" style="margin-bottom: 0px" ng-class="selectedTipStyle">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-8 col-xs-12">
+            <p class="text-xl">
+              <b>  {{slipLabel}} - </b> £1 wins £{{slipOdds| number:0}}
+            </p>
+          </div>
+          <div class="col-sm-4 col-xs-12">
+            <span class="line"><b>Winnings by: </b> </span> <span
+            class="line"> {{lastBetDate | date:'EEE MMM d, h:mm a'}} </span>
+            <br/>
+            <span class="line"> <b> Place bet before: </b> </span> <span class="line">{{firstBetDate | date:'EEE MMM d, h:mm a'}} </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom: 0px">
+      <div class="nano-content">
+        <div class="card-body height-6 scroll style-default-bright text-lg" style="height: auto;">
+          <div class="row" ng-repeat="match in slip" ng-class-odd="'background-white'"
+               ng-class-even="'background-selected'">
+            <div class="col-sm-2 col-xs-2" >
+              <i class="fa fa-futbol-o"></i> <br/>
+              <b ng-class="selectedTipFont" > {{match.selection.odds}}</b>
+            </div>
+            <div class="col-sm-6 col-xs-10">
+                  <span ng-class="(match.home == match.selection.outcome) ? ['font-bold', selectedTipFont]: ''">
+                {{match.home}}</span>
+              <b>-</b>
+                   <span ng-class="(match.away == match.selection.outcome) ?  ['font-bold', selectedTipFont]: ''">
+                {{match.away}}
+                     </span>
+              <br/>
+              <small>{{match.date | date:'EEE MMM d h:mm'}}</small>
+            </div>
+            <div class="col-sm-4 hidden-xs">
+              <small ng-class="selectedTipFont" > English Premier League </small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card card-bordered" style="margin-bottom: 0px" ng-class="selectedTipStyle">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-6 col-xs-12">
+            <span class="line"><b>Total odds: </b> </span> <span class="line"> {{slipOdds| number:0}} </span>
+            <br/>
+            <span class="line"> <b> Stake: </b> </span> <span class="line"> £5 </span>
+            <br/>
+            <span class="line"> <b> Potential winnings: </b> </span> <span class="line"> £{{slipOdds * 5| number:0}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

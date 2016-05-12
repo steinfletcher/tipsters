@@ -39,7 +39,6 @@ angular.module('tipstersApp')
      */
     $scope.competitionClicked = function (competition) {
       competition.selected = !competition.selected;
-
       var selectedComps = [];
       _.each($scope.countries, function (country) {
         selectedComps = _.concat(selectedComps, _.filter(country.competitions, function (comp) {
@@ -51,7 +50,6 @@ angular.module('tipstersApp')
       });
 
       if (!_.isEmpty(selectedCompIds)) {
-        console.log(selectedCompIds);
         dataRetrieval.getMatches(selectedCompIds).success(function (data) {
           $scope.matches = data;
           $scope.generateSlip($scope.targetOdds);
