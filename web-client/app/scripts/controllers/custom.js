@@ -52,7 +52,9 @@ angular.module('tipstersApp')
       if (!_.isEmpty(selectedCompIds)) {
         dataRetrieval.getMatches(selectedCompIds).success(function (data) {
           $scope.matches = data;
-          $scope.generateSlip($scope.targetOdds);
+          if(!_.isEmpty($scope.matches)){
+            $scope.generateSlip($scope.targetOdds);
+          }
         });
       }
     };

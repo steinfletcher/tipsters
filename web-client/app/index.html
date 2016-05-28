@@ -5,6 +5,7 @@
   <title></title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width">
+
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
   <!-- build:css(.) styles/vendor.css -->
   <!-- bower:css -->
@@ -13,22 +14,171 @@
   <!-- endbower -->
   <!-- endbuild -->
   <!-- build:css(.tmp) styles/main.css -->
-  <link rel="stylesheet" href="styles/main.css">
+  <!--
   <link rel="stylesheet" href="styles/materialadmin/font-awesome.css">
   <link rel="stylesheet" href="styles/materialadmin/material-design-iconic-font.css">
   <link rel="stylesheet" href="styles/materialadmin/materialadmin.css">
+  -->
+
   <!-- endbuild -->
+
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="resources/EPIC-DLPACK/css/style.css">
 </head>
-<body ng-app="tipstersApp">
+<body ng-app="tipstersApp" id="epic" style="overflow: auto;" ng-controller="IndexCtrl">
 <!--[if lte IE 8]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
   your browser</a> to improve your experience.</p>
 <![endif]-->
-
-<div>
-  <div ng-view autoscroll="true"></div>
+<div id="slideshow" class="parallax-div vegas-container" style="height: 956px;">
+  <div class="vegas-slide vegas-transition-zoomOut vegas-transition-zoomOut-in" style="transition: all 1000ms;">
+    <div class="vegas-slide-inner"
+         style="background-image: url(images/stadium.jpg); background-color: rgba(0, 0, 0, 0); background-size: cover; background-position: 50% 50%;"></div>
+  </div>
+  <div class="vegas-overlay"></div>
+  <div class="vegas-timer">
+    <div class="vegas-timer-progress" style="transition-duration: 0ms;"></div>
+  </div>
+  <div class="vegas-wrapper" style="overflow: visible; padding: 0px;"></div>
 </div>
 
+<section id="home" class="parallax-div"><img src="resources/EPIC-DLPACK/img/logo.png" alt=""
+                                             class="brand-logo">
+  <div class="content "><h1> <span
+    class="tasty-www"> <span>T</span></span>IPSTERS </h1>
+    <p>The fastest way to have a flutter on matches across Europe</p>
+    <nav>
+      <ul>
+        <li><a href="#intro" class="light-btn">Select Competition</a></li>
+        <li><a href="#custom" class="action-btn">Advanced Slip</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="scroll-indicator"><a href="#intro"><i
+    class="icon ion-ios-arrow-down"></i></a></div>
+</section>
+<div class="intro-trig"></div>
+<section id="intro">
+  <div class="container"><h2>Which competitions interest you?</h2>
+    <p class="subtitle">You can create betting slips from league and cup competitions across Europe. <br/> Choose from
+      our predefined competition groups or <a href="#custom" style="color: #f36;"> select your own!</a></p>
+    <div class="row slip-text-hover">
+      <div class="col-xs-12 col-sm-4 col-lg-4 item-service">
+        <a href="#slip"  ng-click="setSelectedCompetition('european-elite')">
+          <div class="service-item">
+            <i class="icon ion-trophy"></i><h4>European Elite</h4>
+            <p>Bet on games from the elite European leagues.</p>
+          </div>
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-lg-4 item-service">
+        <a href="#slip"  ng-click="setSelectedCompetition('domestic')">
+          <div class="service-item"><i class="icon ion-umbrella"></i><h4>English Domestic</h4>
+            <p>A tailored betslip from the domestic leagues</p></div>
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-lg-4 item-service">
+        <a href="#slip"  ng-click="setSelectedCompetition('grass-roots')">
+          <div class="service-item"><i class="icon ion-ios-football"></i><h4>Grass Roots</h4>
+            <p>Lower league games crafted by our experts</p>
+          </div>
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-lg-4 item-service">
+        <a href="#custom">
+          <div class="service-item"><i class="icon ion-earth"></i><h4>Custom</h4>
+            <p>You are the expert. Create your own betslip!.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="custom">
+  <div class="container"><h2 style="color: white">Advanced slip creation</h2>
+    <p class="subtitle">Bet slips may be generated from matches in the following competitions, make your selection and
+      view the <a href="#slip"> bet slip </a></p>
+    <div class="row">
+      <div ng-repeat="country in countries">
+        <div class="col-md-4 col-xs-12 item-service" ng-repeat="competition in country.competitions">
+          <div ng-click="competitionClicked(competition)"
+               ng-class="competition.selected ? 'selected-comp' : 'unselected-comp'" class="tipster-btn">
+            {{competition.name}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="newsletter">
+  <div class="container"><h2>If you win big <span class="bold-text">don't forget to support us :)</span></h2>
+  </div>
+  <div class="newsletter-trig"></div>
+</section>
+
+<section id="slip">
+  <div class="container"><h2>Slip type</h2>
+    <p class="subtitle">Choose your level of risk and reward </a></p>
+    <div class="row slip-text-hover">
+      <div class="col-xs-12 col-sm-4 col-lg-4 item-service">
+        <a href="#tipsterSlip"  ng-click="generateSlip(250000, 'Moonshot', 'default-dark')">
+          <div class="service-item">
+            <i class="icon ion-android-star-outline"></i><h4>Moonshot</h4>
+            <p>The highest reward betting slip aiming of <b class="tipster-yellow"> 250,000 </b> to 1</p>
+          </div>
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-lg-4 item-service">
+        <a href="#tipsterSlip"  ng-click="generateSlip(5000, 'Holiday', 'warning')">
+          <div class="service-item"><i class="icon ion-plane slip-text-warning"></i><h4>Holiday</h4>
+            <p>Bankroll your next luxury holiday with odds aiming for <b class="tipster-yellow"> 5,000 </b> to 1 </p>
+          </div>
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-lg-4 item-service">
+        <a href="#tipsterSlip"  ng-click="generateSlip(100, 'Night Out', 'primary')">
+          <div class="service-item"><i class="icon ion-happy-outline slip-text-primary"></i><h4>Night Out</h4>
+            <p>Win your next night out with this bet aiming for <b class="tipster-yellow"> 100 </b> to 1</p>
+          </div>
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-lg-4 col-sm-offset-2 col-lg-offset-2 item-service">
+        <a href="#tipsterSlip" ng-click="generateSlip(20, 'Drinks On Me', 'info')">
+          <div class="service-item"><i class="icon ion-beer slip-text-info"></i><h4>Drinks On Me</h4>
+            <p>The next round is on you if this comes in at <b class="tipster-yellow"> 20 </b> to 1 </p>
+          </div>
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-lg-4 item-service">
+        <a href="#tipsterSlip"  ng-click="generateSlip(2, 'Double Up', 'success')">
+          <div class="service-item "><i class="icon ion-arrow-graph-up-left slip-text-success"></i><h4>Double Up</h4>
+            <p>Play it safe with a straight forward <b class="tipster-yellow"> 2 </b> to 1 </p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tipsterSlip">
+  <div class="container" ng-show="slipItems.slipOdds">
+    <br/><br/>
+    <h2>Tipsters Slip</h2>
+    <p class="subtitle"><b> {{slipItems.slipLabel}} </b> - Win £<b class="tipster-yellow"> {{slipItems.slipOdds| number:0}} </b> with a
+      £1  </a></p>
+    <tipster-slip slipItems="slipItems"></tipster-slip>
+  </div>
+</section>
+
+<footer>
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-lg-6"><p class="copyright">© Tipsters</p></div>
+    <div class="col-xs-12 col-sm-6 col-lg-6"></div>
+  </div>
+  <div class="scroll-indicator go-top"><a href="#intro"><i
+    class="icon ion-ios-arrow-down"></i></a></div>
+</footer>
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
 <script>
   !function (A, n, g, u, l, a, r) {
@@ -60,15 +210,47 @@
 
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
 <script src="scripts/app.js"></script>
-<script src="scripts/controllers/profile.js"></script>
-<script src="scripts/controllers/home.js"></script>
-<script src="scripts/directives/bet-criteria.js"></script>
-<script src="scripts/directives/bet-slip.js"></script>
 <script src="scripts/services/data-retrieval.js"></script>
 <script src="scripts/services/slip-generation.js"></script>
 <script src="scripts/services/datashare.js"></script>
 <script src="scripts/controllers/custom.js"></script>
 <script src="scripts/directives/tipster-slip.js"></script>
+<script src="scripts/controllers/index.js"></script>
 <!-- endbuild -->
+
+<script async="" src="resources/EPIC-DLPACK/js/analytics.js"></script>
+<script src="resources/EPIC-DLPACK/js/jquery.easings.min.js"></script>
+<script src="resources/EPIC-DLPACK/js/bootstrap.min.js"></script>
+<script src="resources/EPIC-DLPACK/js/vegas.js"></script>
+<script>$(window).load(function () {
+  "use strict";
+  setTimeout(function () {
+    $('#slideshow').vegas({
+      slides: [{src: 'http://cdn.themehelite.com/themeforest/epic/img/static-background.jpg'}],
+      transition: 'zoomOut'
+    });
+  }, 500);
+});</script>
+<script src="resources/EPIC-DLPACK/js/photoswipe.js"></script>
+<script src="resources/EPIC-DLPACK/js/photoswipe-ui-default.js"></script>
+<script src="resources/EPIC-DLPACK/js/notifyMe.js"></script>
+<script src="resources/EPIC-DLPACK/js/contact-me.js"></script>
+<script src="resources/EPIC-DLPACK/js/jquery.countdown.js"></script>
+<script src="resources/EPIC-DLPACK/js/main.js"></script>
+<script>(function (i, s, o, g, r, a, m) {
+  i['GoogleAnalyticsObject'] = r;
+  i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+  a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+  a.async = 1;
+  a.src = g;
+  m.parentNode.insertBefore(a, m)
+})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+ga('create', 'UA-60503361-1', 'auto');
+ga('send', 'pageview');</script>
+<!--[if lt IE 10]>
+<script type="text/javascript" src="js/placeholder.js"></script><![endif]-->
+
 </body>
 </html>

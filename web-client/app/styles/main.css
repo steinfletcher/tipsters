@@ -1,5 +1,81 @@
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,600,400italic,300);
 
+.tipster-yellow {
+  color: #FFD800;
+}
+
+.tipster-btn {
+  font-family: Montserrat, "Helvetica Neue", "Lucida Grande", Arial, Verdana, sans-serif;
+  background: transparent;
+  font-weight: 700;
+  padding: 0.7em 1.4em;
+  color: #FFFFFF;
+  margin-right: 10px;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  border-radius: 0;
+  border: 3px solid #FFFFFF;
+  display: block;
+  float: left;
+  width: 100%;
+  min-height: 125px;
+  cursor: pointer;
+}
+
+.service-item {
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 500px) {
+  .tipster-btn {
+    min-height: 0px !important;
+  }
+}
+
+section#tipsterSlip {
+  background: #fff;
+  padding: 100px 0 10rem;
+}
+
+section#slip {
+  background: #fff;
+  padding: 100px 0 10rem;
+}
+
+section#slip .item-service i {
+  font-size: 5rem;
+}
+
+section#slip .item-service {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+section#custom {
+  background: #337AB7;
+  padding: 100px 0 10rem;
+}
+
+section#custom .item-service i {
+  font-size: 5rem;
+}
+
+section#custom .item-service {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+section#custom-divider {
+  background: #2B2D35;
+  padding: 10rem 0 0;
+  overflow: hidden;
+}
+
+#custom .subtitle {
+  color: #FFFFFF;
+}
+
 /* background for striped slip */
 
 .background-white {
@@ -30,6 +106,51 @@
   background: rgba(144, 149, 217, 0.06);
 }
 
+/* text for slip */
+
+.slip-text-white {
+  color: rgba(255, 255, 255, 1);
+}
+
+.slip-text-default-dark {
+  color: rgba(0, 0, 0, 1);
+}
+
+.text-default-dark {
+  color: rgba(0, 0, 0, 1);
+}
+
+.slip-text-warning {
+  color: rgba(255, 152, 0, 1);
+}
+
+.slip-text-primary {
+  color: rgba(10, 168, 158, 1);
+}
+
+.slip-text-info {
+  color: rgba(33, 150, 243, 1);
+}
+
+.slip-text-success {
+  color: rgba(76, 175, 80, 1);
+}
+
+.slip-text-selected {
+  color: rgba(144, 149, 217, 6);
+}
+
+.slip-text-hover .item-service:hover .service-item {
+  background: rgba(226, 226, 226, 0.5);
+}
+
+.selected-comp {
+  background: rgb(222, 161, 52);
+}
+
+.unselected {
+  color: rgba(145, 145, 145, 1);
+}
 
 
 .font-bold {
