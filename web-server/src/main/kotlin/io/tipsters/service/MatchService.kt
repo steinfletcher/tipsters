@@ -5,10 +5,10 @@ import io.tipsters.error.CompetitionNotFoundError
 import io.tipsters.repository.CompetitionRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.cache.annotation.Cacheable
-import org.springframework.stereotype.Service
+import org.springframework.stereotype.Component
 import java.util.*
 
-@Service
+@Component
 open class MatchService @Autowired constructor(val oddsProviderFactory: OddsProviderFactory,
                                                val matchesRepository: CompetitionRepository) {
 
