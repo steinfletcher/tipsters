@@ -32,7 +32,8 @@ CREATE TABLE competitions (
 
 INSERT INTO regions (id, name, rank) VALUES
   ('70d525cb-2845-4ae0-9cc9-5d189f847e28', 'UK', 1),
-  ('0d349532-6b22-45c3-9894-f85b53f0d90e', 'European Major Leagues', 2);
+  ('0d349532-6b22-45c3-9894-f85b53f0d90e', 'European Major Leagues', 2),
+  ('6cf4e45d-ae75-4620-a993-89054101f818', 'International', 3);
 
 INSERT INTO countries (id, name, region_id, rank) VALUES
   ('720efe16-0517-47bf-8af0-e6fcca8baa6c', 'England', '70d525cb-2845-4ae0-9cc9-5d189f847e28', 1),
@@ -40,7 +41,8 @@ INSERT INTO countries (id, name, region_id, rank) VALUES
   ('2464dd3b-4ce1-4d7c-8c65-3f69e6f55a2a', 'Germany', '0d349532-6b22-45c3-9894-f85b53f0d90e', 3),
   ('3d36f907-3ea1-405e-9f38-07b83047735d', 'Italy', '0d349532-6b22-45c3-9894-f85b53f0d90e', 4),
   ('f1ab9786-938e-4ff4-b826-c93a58cea7ac', 'Scotland', '70d525cb-2845-4ae0-9cc9-5d189f847e28', 5),
-  ('e882a456-d703-498b-a63d-4512fe3645b9', 'Wales', '70d525cb-2845-4ae0-9cc9-5d189f847e28', 6);
+  ('e882a456-d703-498b-a63d-4512fe3645b9', 'Wales', '70d525cb-2845-4ae0-9cc9-5d189f847e28', 6),
+  ('221cbb75-76f7-4a7a-8cb0-6e483a4e1423', 'International', '6cf4e45d-ae75-4620-a993-89054101f818', 7);
 
 INSERT INTO competitions (id, country_id, name, rank) VALUES
   -- england
@@ -59,4 +61,7 @@ INSERT INTO competitions (id, country_id, name, rank) VALUES
   ('5b6854e1-5fc9-4c9f-b309-9084a57a8316', '2464dd3b-4ce1-4d7c-8c65-3f69e6f55a2a', 'German Bundesliga', 1),
   ('e8bd899c-8c7c-4ab7-a439-36b7b042df4d', '3a99b0a1-f8dc-44f9-97d0-fca1a984c8a9', 'Spanish La Liga Primera', 1),
   ('b6bb1282-c5dd-4e64-a0ad-5060c417d62d', '3a99b0a1-f8dc-44f9-97d0-fca1a984c8a9', 'Spanish Segunda Division Femenina', 2),
-  ('02d3a983-ae9d-4163-a5b9-0564b01e1c41', '3d36f907-3ea1-405e-9f38-07b83047735d', 'Italian Serie A', 1);
+  ('02d3a983-ae9d-4163-a5b9-0564b01e1c41', '3d36f907-3ea1-405e-9f38-07b83047735d', 'Italian Serie A', 1),
+  ('e5717720-2d95-4e0f-a3cd-9c8642d85692', '221cbb75-76f7-4a7a-8cb0-6e483a4e1423', 'Euro 2016', 1),
+  ('49d49116-3b34-48ab-96b2-81e8d7e648c3', '221cbb75-76f7-4a7a-8cb0-6e483a4e1423', 'Copa America', 2),
+  ('5cae52f9-4ffd-49c9-ac70-035ea0ede382', '221cbb75-76f7-4a7a-8cb0-6e483a4e1423', 'International Friendlies', 3);

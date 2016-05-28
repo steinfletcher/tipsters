@@ -13,3 +13,8 @@ interface WilliamHillEuropeOdds {
     @GET("/openbet_cdn?action=template&template=getHierarchyByMarketType&classId=46&marketSort=MR&filterBIR=N")
     fun matches(): Call<ResponseBody>
 }
+
+interface WilliamHillInternationalOdds {
+    @GET("/openbet_cdn?action=template&template=getHierarchyByMarketType&classId=36&marketSort=MR&filterBIR=N")
+    fun matches(): Call<ResponseBody>
+}

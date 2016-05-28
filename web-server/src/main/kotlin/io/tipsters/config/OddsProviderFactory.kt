@@ -2,8 +2,10 @@ package io.tipsters.config
 
 import io.tipsters.common.oddsprovider.OddsProvider
 import io.tipsters.oddsfeedclient.WilliamHillEuropeOdds
+import io.tipsters.oddsfeedclient.WilliamHillInternationalOdds
 import io.tipsters.oddsfeedclient.WilliamHillUkOdds
 import io.tipsters.oddsfeedclient.oddsprovider.WilliamHillEuropeOddsProvider
+import io.tipsters.oddsfeedclient.oddsprovider.WilliamHillInternationalOddsProvider
 import io.tipsters.oddsfeedclient.oddsprovider.WilliamHillUkOddsProvider
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -34,7 +36,10 @@ open class OddsProviderConfig {
         val williamHillEuroClient = willHillClientBuilder.create(WilliamHillEuropeOdds::class.java)
         val williamHillEuroProvider = WilliamHillEuropeOddsProvider(williamHillEuroClient)
 
-        return OddsProviders(listOf(williamHillUkProvider, williamHillEuroProvider))
+        val williamHillInternationalClient = willHillClientBuilder.create(WilliamHillInternationalOdds::class.java)
+        val williamHillInternationalProvider = WilliamHillInternationalOddsProvider(williamHillInternationalClient)
+
+        return OddsProviders(listOf(williamHillUkProvider, williamHillEuroProvider, williamHillInternationalProvider))
     }
 }
 
