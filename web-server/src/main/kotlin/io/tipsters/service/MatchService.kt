@@ -4,7 +4,6 @@ import io.tipsters.common.data.MatchesByCompetition
 import io.tipsters.error.CompetitionNotFoundError
 import io.tipsters.repository.CompetitionRepository
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Component
 import java.util.*
 
@@ -12,7 +11,6 @@ import java.util.*
 open class MatchService @Autowired constructor(val oddsProviderFactory: OddsProviderFactory,
                                                val matchesRepository: CompetitionRepository) {
 
-    @Cacheable("matchesByCompetitions")
     open fun matchesByCompetitions(competitionIDs: Set<UUID>): List<MatchesByCompetition> {
         val competitionNames: Set<String> = matchesRepository.findCompetitionNamesByIdIn(
                 competitionIDs.map { id -> id.toString() }
