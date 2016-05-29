@@ -6,11 +6,11 @@
       <div class="card-body height-6 scroll style-default-bright text-lg" style="height: auto;">
         <div class="row" ng-repeat="match in slipItems.slip" ng-class-odd="'background-white'"
              ng-class-even="'background-selected'">
-          <div class="col-sm-2 col-xs-2">
+          <div class="col-sm-3 col-xs-2">
             <i class="icon ion-ios-football"></i> <br/>
-            <b ng-class="slipItems.selectedTipFont"> {{match.selection.odds}}</b>
+            <span class="hidden-lg hidden-md hidden-sm"> <span style="font-size: small;" ng-class="slipItems.selectedTipFont"> {{match.selection.odds}}</span> </span>
           </div>
-          <div class="col-sm-6 col-xs-10">
+          <div class="col-sm-7 col-xs-10">
                   <span
                     ng-class="(match.home == match.selection.outcome) ? ['font-bold', slipItems.selectedTipFont]: 'unselected'">
                 {{match.home}}</span>
@@ -20,18 +20,10 @@
                 {{match.away}}
                      </span>
             <br/>
-            <small>{{match.date | date:'EEE MMM d h:mm'}}</small>
+            <b style="font-size: x-small;">{{match.date | date:'EEE MMM d h:mm'}}</b>
           </div>
-          <div class="col-sm-4 hidden-xs">
-            <small ng-class="slipItems.selectedTipFont"> English Premier League</small>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12 col-xs-12" style="text-align: center;">
-            <span class="line unselected"><b>Winnings by: </b>{{slipItems.lastBetDate | date:'EEE MMM d, h:mm a'}} </span>
-            <br/>
-            <span class="line unselected"> <b> Place bet
-              before: </b> {{slipItems.firstBetDate | date:'EEE MMM d, h:mm a'}} </span>
+          <div class="col-sm-2 hidden-xs">
+            <b ng-class="slipItems.selectedTipFont"> {{match.selection.odds}}</b>
           </div>
         </div>
       </div>
@@ -51,6 +43,14 @@
           class="line"> £{{slipItems.slipOdds * 1| number:0}}</span>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 col-xs-12">
+      <span class="line unselected"><b>Winnings by: </b>{{slipItems.lastBetDate | date:'EEE MMM d, h:mm a'}} </span>
+      <br/>
+            <span class="line unselected"> <b> Place bet
+              before: </b> {{slipItems.firstBetDate | date:'EEE MMM d, h:mm a'}} </span>
     </div>
   </div>
 </div>
