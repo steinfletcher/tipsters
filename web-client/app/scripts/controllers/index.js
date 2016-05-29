@@ -30,6 +30,9 @@ angular.module('tipstersApp')
         $scope.category = _.find(categories, ['name', group]);
         dataRetrieval.getMatches($scope.category.competitionIDs).success(function (data) {
           $scope.matches = data;
+          if (!_.isEmpty($scope.matches)) {
+            $scope.generateSlip($scope.targetOdds, 'Night Out', 'primary');
+          }
         });
       });
     };

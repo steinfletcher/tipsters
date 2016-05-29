@@ -7,7 +7,7 @@
         <div class="row" ng-repeat="match in slipItems.slip" ng-class-odd="'background-white'"
              ng-class-even="'background-selected'">
           <div class="col-sm-2 col-xs-2">
-            <i class="fa fa-futbol-o"></i> <br/>
+            <i class="icon ion-ios-football"></i> <br/>
             <b ng-class="slipItems.selectedTipFont"> {{match.selection.odds}}</b>
           </div>
           <div class="col-sm-6 col-xs-10">
@@ -41,12 +41,14 @@
     <div class="card-body">
       <div class="row">
         <div class="col-sm-12 col-xs-12">
+          <span class="line"><b>No. of Lines: </b> </span> <span class="line"> {{slipItems.slip.length| number:0}} </span>
+          <br/>
           <span class="line"><b>Total odds: </b> </span> <span class="line"> {{slipItems.slipOdds| number:0}} </span>
           <br/>
-          <span class="line"> <b> Stake: </b> </span> <span class="line"> £5 </span>
+          <span class="line"> <b> Stake: </b> </span> <span class="line"> £1 </span>
           <br/>
           <span class="line"> <b> Potential winnings: </b> </span> <span
-          class="line"> £{{slipItems.slipOdds * 5| number:0}}</span>
+          class="line"> £{{slipItems.slipOdds * 1| number:0}}</span>
         </div>
       </div>
     </div>

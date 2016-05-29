@@ -17,11 +17,23 @@
     ]
   },
   {
-    "name": "grass-roots",
+    "name": "copa-america",
     "competitionIDs": [
-      "c534edcf-4f6f-4b9c-9da4-3629455f7623",
-      "b0a6f611-116a-4e24-8d1c-8e7a7cbd7041",
-      "d00825a2-c389-47b6-8e89-2e37086f5fd7"
+      "49d49116-3b34-48ab-96b2-81e8d7e648c3"
+    ]
+  },
+  {
+    "name": "euro-2016",
+    "competitionIDs": [
+      "e5717720-2d95-4e0f-a3cd-9c8642d85692"
+    ]
+  },
+  {
+    "name": "internationals",
+    "competitionIDs": [
+      "e5717720-2d95-4e0f-a3cd-9c8642d85692",
+      "49d49116-3b34-48ab-96b2-81e8d7e648c3",
+      "5cae52f9-4ffd-49c9-ac70-035ea0ede382"
     ]
   }
 ]

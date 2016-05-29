@@ -11,18 +11,19 @@
   <!-- bower:css -->
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
   <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css" />
+  <link rel="stylesheet" href="styles/materialadmin/materialadmin.css">
   <!-- endbower -->
   <!-- endbuild -->
   <!-- build:css(.tmp) styles/main.css -->
   <!--
   <link rel="stylesheet" href="styles/materialadmin/font-awesome.css">
   <link rel="stylesheet" href="styles/materialadmin/material-design-iconic-font.css">
-  <link rel="stylesheet" href="styles/materialadmin/materialadmin.css">
+
   -->
 
   <!-- endbuild -->
 
-  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/tipster-main.css">
   <link rel="stylesheet" href="resources/EPIC-DLPACK/css/style.css">
 </head>
 <body ng-app="tipstersApp" id="epic" style="overflow: auto;" ng-controller="IndexCtrl">
@@ -64,6 +65,27 @@
       our predefined competition groups or <a href="#custom" style="color: #f36;"> select your own!</a></p>
     <div class="row slip-text-hover">
       <div class="col-xs-12 col-sm-4 col-lg-4 item-service">
+        <a href="#slip"  ng-click="setSelectedCompetition('euro-2016')">
+          <div class="service-item">
+            <i class="icon ion-trophy"></i><h4>Euro 2016</h4>
+            <p>Bet on games from Euro 2016.</p>
+          </div>
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-lg-4 item-service">
+        <a href="#slip"  ng-click="setSelectedCompetition('copa-america')">
+          <div class="service-item"><i class="icon ion-android-sunny"></i><h4>Copa America</h4>
+            <p>A tailored betslip from the the Copa America 2016 Championship </p></div>
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-lg-4 item-service">
+        <a href="#slip"  ng-click="setSelectedCompetition('internationals')">
+          <div class="service-item"><i class="icon ion-ios-football"></i><h4>All Internationals</h4>
+            <p>Bets from all international matches this summer from around the world!</p>
+          </div>
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-lg-4 item-service" ng-hide="true">
         <a href="#slip"  ng-click="setSelectedCompetition('european-elite')">
           <div class="service-item">
             <i class="icon ion-trophy"></i><h4>European Elite</h4>
@@ -72,13 +94,13 @@
         </a>
       </div>
       <div class="col-xs-12 col-sm-4 col-lg-4 item-service">
-        <a href="#slip"  ng-click="setSelectedCompetition('domestic')">
+        <a href="#slip"  ng-click="setSelectedCompetition('domestic')"  ng-hide="true">
           <div class="service-item"><i class="icon ion-umbrella"></i><h4>English Domestic</h4>
             <p>A tailored betslip from the domestic leagues</p></div>
         </a>
       </div>
       <div class="col-xs-12 col-sm-4 col-lg-4 item-service">
-        <a href="#slip"  ng-click="setSelectedCompetition('grass-roots')">
+        <a href="#slip"  ng-click="setSelectedCompetition('grass-roots')"  ng-hide="true">
           <div class="service-item"><i class="icon ion-ios-football"></i><h4>Grass Roots</h4>
             <p>Lower league games crafted by our experts</p>
           </div>
@@ -87,7 +109,7 @@
       <div class="col-xs-12 col-sm-4 col-lg-4 item-service">
         <a href="#custom">
           <div class="service-item"><i class="icon ion-earth"></i><h4>Custom</h4>
-            <p>You are the expert. Create your own betslip!.</p>
+            <p>You are the expert. Create your own betslip!</p>
           </div>
         </a>
       </div>
