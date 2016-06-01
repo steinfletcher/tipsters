@@ -5,13 +5,14 @@ import io.tipsters.domain.Country
 import io.tipsters.domain.Region
 import java.util.*
 
-data class CompetitionData(val id: UUID, val name: String, val rank: Int) {
+data class CompetitionData(val id: UUID, val name: String, val rank: Int, val active: Boolean) {
     companion object {
         fun of(competition: Competition): CompetitionData {
             return CompetitionData(
                     id = competition.id,
                     name = competition.name,
-                    rank = competition.rank)
+                    rank = competition.rank,
+                    active = competition.active)
         }
     }
 }

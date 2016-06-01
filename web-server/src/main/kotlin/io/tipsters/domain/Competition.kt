@@ -10,6 +10,7 @@ import javax.persistence.Table
 class Competition (
         var name: String = "",
         var rank: Int = 0,
+        var active: Boolean = true,
         @ManyToOne @JoinColumn(name = "country_id") var country: Country) : BaseEntity() {
-    constructor() : this("", 0, Country())
+    constructor() : this("", 0, false, Country())
 }
