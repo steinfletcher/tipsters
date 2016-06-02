@@ -17,6 +17,6 @@ spring:
 tipsters:
   willHillFeedUrl: http://cachepricefeeds.williamhill.com/
 
-logging.level.: INFO
+logging.level.: DEBUG
 logging.level:
   io.tipsters: DEBUG

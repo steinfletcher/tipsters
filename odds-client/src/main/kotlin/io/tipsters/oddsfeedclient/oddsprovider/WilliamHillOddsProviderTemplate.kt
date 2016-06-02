@@ -6,13 +6,14 @@ import io.tipsters.common.oddsprovider.OddsProvider
 import io.tipsters.oddsfeedclient.parser.WillHillOddsFeedSaxHandler
 import okhttp3.ResponseBody
 import retrofit2.Response
+import java.time.LocalDateTime
 import javax.xml.parsers.SAXParserFactory
 
 /**
  * A parser to extract odds from William Hill XML response
  */
 abstract class WilliamHillOddsProviderTemplate : OddsProvider {
-    override fun odds(competitionNames: Set<String>): List<MatchesByCompetition> {
+    override fun odds(competitionNames: Set<String>, matchStart: LocalDateTime, matchEnd: LocalDateTime): List<MatchesByCompetition> {
         val response = try {
             clientRequest()
         } catch (e: Exception) {
@@ -20,7 +21,7 @@ abstract class WilliamHillOddsProviderTemplate : OddsProvider {
         }
         if (response.isSuccessful) {
             val parser = SAXParserFactory.newInstance().newSAXParser()
-            val handler = WillHillOddsFeedSaxHandler()
+            val handler = WillHillOddsFeedSaxHandler(matchStart, matchEnd)
             parser.parse(response.body().byteStream(), handler)
             return handler.competitions.filter { competition -> competitionNames.contains(competition.competition) }
         } else {

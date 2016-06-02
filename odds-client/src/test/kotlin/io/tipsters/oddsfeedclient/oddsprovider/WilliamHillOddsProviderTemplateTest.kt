@@ -12,6 +12,7 @@ import org.mockito.Mockito
 import retrofit2.Call
 import retrofit2.Response
 import java.io.IOException
+import java.time.LocalDateTime
 
 class WilliamHillOddsProviderTemplateTest {
     lateinit var httpClient: WilliamHillUkOdds
@@ -29,7 +30,7 @@ class WilliamHillOddsProviderTemplateTest {
         val httpMockResponse = mock(Call::class.java)
         given(httpMockResponse.execute()).willThrow(IOException("Error"))
 
-        underTest.odds(competitions)
+        underTest.odds(competitions, LocalDateTime.MIN, LocalDateTime.MAX)
     }
 
     @Test(expected = OddsProviderError::class)
@@ -39,6 +40,6 @@ class WilliamHillOddsProviderTemplateTest {
         given(httpMockResponse.execute()).willReturn(
                 Response.error(500, ResponseBody.create(MediaType.parse("application/xml"), "")))
 
-        underTest.odds(competitions)
+        underTest.odds(competitions, LocalDateTime.MIN, LocalDateTime.MAX)
     }
 }

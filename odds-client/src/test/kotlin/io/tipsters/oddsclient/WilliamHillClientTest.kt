@@ -9,6 +9,7 @@ import org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Test
 import retrofit2.Retrofit
+import java.time.LocalDateTime
 import org.hamcrest.CoreMatchers.`is` as eq
 
 class WilliamHillClientTest {
@@ -35,7 +36,7 @@ class WilliamHillClientTest {
         oddsApiStub.willReturnTheOddsXMLFeed()
 
         val oddsProvider = WilliamHillUkOddsProvider(underTest)
-        val competitions: List<MatchesByCompetition> = oddsProvider.odds(setOf("Scottish Championship"))
+        val competitions: List<MatchesByCompetition> = oddsProvider.odds(setOf("Scottish Championship"), LocalDateTime.MIN, LocalDateTime.MAX)
 
         assertThat(competitions[0].competition, eq("Scottish Championship"))
         assertThat(competitions[0].matches[0].home, eq("Hibernian"))

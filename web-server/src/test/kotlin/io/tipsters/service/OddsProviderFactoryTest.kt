@@ -5,6 +5,7 @@ import io.tipsters.common.oddsprovider.OddsProvider
 import io.tipsters.config.OddsProviders
 import org.junit.Assert.assertThat
 import org.junit.Test
+import java.time.LocalDateTime
 import org.hamcrest.CoreMatchers.`is` as eq
 
 class OddsProviderFactoryTest {
@@ -33,7 +34,7 @@ class OddsProviderFactoryTest {
             override fun providesCompetitions(): Set<String> {
                 return setOf("competition1", "competition2", "competition3")
             }
-            override fun odds(competitionNames: Set<String>): List<MatchesByCompetition> {
+            override fun odds(competitionNames: Set<String>, matchStart: LocalDateTime, matchEnd: LocalDateTime): List<MatchesByCompetition> {
                 return listOf(
                         MatchesByCompetition("competition1", emptyList()),
                         MatchesByCompetition("competition2", emptyList()),
@@ -48,7 +49,7 @@ class OddsProviderFactoryTest {
             override fun providesCompetitions(): Set<String> {
                 return setOf("competition1", "competition2")
             }
-            override fun odds(competitionNames: Set<String>): List<MatchesByCompetition> {
+            override fun odds(competitionNames: Set<String>, matchStart: LocalDateTime, matchEnd: LocalDateTime): List<MatchesByCompetition> {
                 return listOf(
                         MatchesByCompetition("competition1", emptyList()),
                         MatchesByCompetition("competition2", emptyList())

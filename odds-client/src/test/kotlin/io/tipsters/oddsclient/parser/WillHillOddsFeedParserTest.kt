@@ -13,7 +13,7 @@ class WillHillOddsFeedParserTest {
     fun parsesTheOddsFeedStream() {
         val inputStream = ClassLoader.getSystemResourceAsStream("euro_football_stream.xml")
         val parser = SAXParserFactory.newInstance().newSAXParser()
-        val handler = WillHillOddsFeedSaxHandler()
+        val handler = WillHillOddsFeedSaxHandler(LocalDateTime.MIN, LocalDateTime.MAX)
         parser.parse(inputStream, handler)
 
         val firstCompetition = handler.competitions[0]

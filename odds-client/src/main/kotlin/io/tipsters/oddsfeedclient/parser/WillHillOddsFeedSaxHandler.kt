@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter
  * This is more efficient as the entire DOM is not loaded into memory.
  * Not thread safe (create an instance per invocation)
  */
-internal class WillHillOddsFeedSaxHandler : DefaultHandler() {
+internal class WillHillOddsFeedSaxHandler(val start: LocalDateTime, val end: LocalDateTime) : DefaultHandler() {
     private lateinit var matches: MutableList<Match>
     private var match: Match? = null
     private lateinit var bets: MutableList<Bet>
@@ -55,9 +55,13 @@ internal class WillHillOddsFeedSaxHandler : DefaultHandler() {
     override fun endElement(uri: String?, localName: String?, qName: String?) {
         when (qName) {
             "type" -> competitions.add(competition)
-            "market" -> if (match != null) matches.add(match!!)
+            "market" -> if (match != null && isWithinPeriod(match as Match)) matches.add(match!!)
             "participant" -> bets.add(bet)
         }
+    }
+
+    private fun isWithinPeriod(match: Match): Boolean {
+        return match.date.isBefore(end) && match.date.isAfter(start)
     }
 
     override fun characters(ch: CharArray?, start: Int, length: Int) {
