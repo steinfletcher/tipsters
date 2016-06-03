@@ -28,8 +28,8 @@ data class MatchesByCompetitions(
     val competitionIDs: Set<UUID>,
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    val start: LocalDateTime = LocalDateTime.MIN,
+    val start: LocalDateTime? = LocalDateTime.MIN,
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    val end: LocalDateTime = LocalDateTime.MAX
+    val end: LocalDateTime? = LocalDateTime.MAX
 )

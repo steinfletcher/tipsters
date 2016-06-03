@@ -6,6 +6,7 @@ import io.tipsters.error.CompetitionNotFoundError
 import io.tipsters.repository.CompetitionRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
+import java.time.LocalDateTime
 
 @Component
 open class MatchService @Autowired constructor(val oddsProviderFactory: OddsProviderFactory,
@@ -21,6 +22,8 @@ open class MatchService @Autowired constructor(val oddsProviderFactory: OddsProv
         }
 
         val oddsProviders = oddsProviderFactory.providersForCompetitions(competitionNames)
-        return oddsProviders.flatMap { provider -> provider.odds(competitionNames, request.start, request.end) }
+        val start = request.start ?: LocalDateTime.MIN
+        val end = request.end ?: LocalDateTime.MAX
+        return oddsProviders.flatMap { provider -> provider.odds(competitionNames, start, end) }
     }
 }
