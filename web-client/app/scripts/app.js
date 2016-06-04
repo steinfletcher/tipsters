@@ -16,12 +16,15 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'angular-loading-bar',
+    'toastr'
+
   ])
   .constant('config',{
     apiUrl: 'http://52.18.221.2:19000/api/tipsters'
   })
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, toastrConfig) {
     $routeProvider
       .when('/old', {
         templateUrl: 'views/main.html',
@@ -42,4 +45,10 @@ angular
       .otherwise({
         redirectTo: '/'
       });
+
+    angular.extend(toastrConfig, {
+      closeButton: true,
+      tapToDismiss: true,
+      timeOut: 1000
+    });
   });

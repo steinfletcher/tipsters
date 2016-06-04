@@ -11,6 +11,8 @@
   <!-- bower:css -->
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
   <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css" />
+  <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css" />
+  <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
   <!-- endbower -->
   <!-- endbuild -->
   <!-- build:css(.tmp) styles/main.css -->
@@ -132,12 +134,6 @@
   </div>
 </section>
 
-<section id="newsletter">
-  <div class="container"><h2>If you win big <span class="bold-text">don't forget to support us :)</span></h2>
-  </div>
-  <div class="newsletter-trig"></div>
-</section>
-
 <section id="slip">
   <div class="container"><h2>Slip type</h2>
     <p class="subtitle">Choose your level of risk and reward </a></p>
@@ -181,13 +177,15 @@
     </div>
   </div>
 </section>
-
-<section id="tipsterSlip">
-  <div class="container" ng-show="slipItems.slipOdds">
+<section id="newsletter" ng-show="slipItems.slipOdds">
+  <div class="container"><h2>If you win big <span class="bold-text">don't forget to support us :)</span></h2>
+  </div>
+  <div class="newsletter-trig"></div>
+</section>
+<section id="tipsterSlip" ng-show="slipItems.slipOdds">
+  <div class="container">
     <br/><br/>
-    <h2>Tipsters Slip</h2>
-    <p class="subtitle"><b> {{slipItems.slipLabel}} </b> - Win £<b class="tipster-yellow"> {{slipItems.slipOdds| number:0}} </b> with a
-      £1  </a></p>
+    <h2>Your suggested slip</h2>
     <tipster-slip slipItems="slipItems"></tipster-slip>
   </div>
 </section>
@@ -226,6 +224,8 @@
 <script src="bower_components/angular-touch/angular-touch.js"></script>
 <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="bower_components/lodash/lodash.js"></script>
+<script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+<script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 

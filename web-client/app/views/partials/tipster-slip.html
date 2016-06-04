@@ -1,5 +1,6 @@
 <div ng-show="slipItems.slipOdds">
-  <div class="card card-bordered" style="margin-bottom: 0px" ng-class="slipItems.selectedTipStyle">
+  <div class="card card-bordered" style="margin-bottom: 0px; text-align: center" ng-class="slipItems.selectedTipStyle">
+    <b> {{slipItems.slipLabel}} </b> - Win £ <b> {{slipItems.slipOdds| number:0}} </b> with a £1</a>
   </div>
   <div class="card" style="margin-bottom: 0px">
     <div class="nano-content">
@@ -8,7 +9,8 @@
              ng-class-even="'background-selected'">
           <div class="col-sm-3 col-xs-2">
             <i class="icon ion-ios-football"></i> <br/>
-            <span class="hidden-lg hidden-md hidden-sm"> <span style="font-size: small;" ng-class="slipItems.selectedTipFont"> {{match.selection.odds}}</span> </span>
+            <span class="hidden-lg hidden-md hidden-sm"> <span style="font-size: small;"
+                                                               ng-class="slipItems.selectedTipFont"> {{match.selection.odds}}</span> </span>
           </div>
           <div class="col-sm-7 col-xs-10">
                   <span
@@ -33,24 +35,18 @@
     <div class="card-body">
       <div class="row">
         <div class="col-sm-12 col-xs-12">
-          <span class="line"><b>No. of Lines: </b> </span> <span class="line"> {{slipItems.slip.length| number:0}} </span>
+          <span class="line"><b>No. of Lines: </b> </span> <span
+          class="line"> {{slipItems.slip.length| number:0}} </span>
           <br/>
           <span class="line"><b>Total odds: </b> </span> <span class="line"> {{slipItems.slipOdds| number:0}} </span>
           <br/>
-          <span class="line"> <b> Stake: </b> </span> <span class="line"> £1 </span>
+          <span class="line "><b>Winnings by: </b>{{slipItems.lastBetDate | date:'EEE MMM d, h:mm a'}} </span>
           <br/>
-          <span class="line"> <b> Potential winnings: </b> </span> <span
-          class="line"> £{{slipItems.slipOdds * 1| number:0}}</span>
+          <span class="line "> <b> Place bet
+            before: </b> {{slipItems.firstBetDate | date:'EEE MMM d, h:mm a'}} </span>
         </div>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-sm-12 col-xs-12">
-      <span class="line unselected"><b>Winnings by: </b>{{slipItems.lastBetDate | date:'EEE MMM d, h:mm a'}} </span>
-      <br/>
-            <span class="line unselected"> <b> Place bet
-              before: </b> {{slipItems.firstBetDate | date:'EEE MMM d, h:mm a'}} </span>
-    </div>
-  </div>
+
 </div>

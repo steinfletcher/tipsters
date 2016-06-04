@@ -27,6 +27,11 @@
   cursor: pointer;
 }
 
+#slip .service-item {
+  color: white;
+}
+
+
 @media only screen and (max-width: 500px) {
   .tipster-btn {
     min-height: 0px !important;
@@ -35,7 +40,7 @@
 
 section#tipsterSlip {
   background: #fff;
-  padding: 100px 0 10rem;
+  padding: 0px 0 10rem;
 }
 
 section#slip {

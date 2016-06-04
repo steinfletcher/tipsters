@@ -8,7 +8,7 @@
  * Controller of the tipstersApp
  */
 angular.module('tipstersApp')
-  .controller('IndexCtrl', function ($scope, dataRetrieval, slipGeneration, $location) {
+  .controller('IndexCtrl', function ($scope, dataRetrieval, slipGeneration, $location, toastr) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -30,9 +30,6 @@ angular.module('tipstersApp')
         $scope.category = _.find(categories, ['name', group]);
         dataRetrieval.getMatches($scope.category.competitionIDs).success(function (data) {
           $scope.matches = data;
-          if (!_.isEmpty($scope.matches)) {
-            $scope.generateSlip($scope.targetOdds, 'Night Out', 'primary');
-          }
         });
       });
     };
@@ -66,19 +63,26 @@ angular.module('tipstersApp')
           return comp.selected === true;
         }));
       });
-      var selectedCompIds = _.map(selectedComps, function (comp) {
+      $scope.selectedCompIds = _.map(selectedComps, function (comp) {
         return comp.id;
       });
 
-      if (!_.isEmpty(selectedCompIds)) {
-        dataRetrieval.getMatches(selectedCompIds).success(function (data) {
-          $scope.matches = data;
-          if (!_.isEmpty($scope.matches)) {
-            $scope.generateSlip($scope.targetOdds, 'Night Out', 'primary');
-          }
-        });
-      }
     };
+
+    //watch selected competitions for changes, debounce/throttle for 1 seconds to allow selection
+    $scope.$watch('selectedCompIds', _.debounce(function (selectedCompIds) {
+      $scope.$apply(function () {
+        if (!_.isEmpty(selectedCompIds)) {
+          dataRetrieval.getMatches(selectedCompIds).success(function (data) {
+            $scope.matches = data;
+            /*
+            if (!_.isEmpty($scope.matches)) {
+              $scope.generateSlip($scope.targetOdds, 'Night Out', 'primary');
+            }*/
+          });
+        }
+      });
+    }, 1000));
 
 
     /**
@@ -87,24 +91,29 @@ angular.module('tipstersApp')
      * @returns {*}
      */
     $scope.generateSlip = function (targetOdds, label, style) {
-      $scope.slipItems = {};
-      $scope.slipItems.selectedTipStyle = 'style-' + style;
-      $scope.slipItems.selectedTipFont = 'slip-text-' + style;
-      $scope.slipItems.slipLabel = label;
-      $scope.slipItems.targetOdds = targetOdds;
-      $scope.slipItems.slip = slipGeneration.generateSlip($scope.matches, targetOdds);
-      if (!_.isEmpty($scope.slipItems.slip)) {
-        $scope.slipItems.slipOdds = slipGeneration.calculateSlipOdds($scope.slipItems.slip);
-        //earliest match
-        $scope.slipItems.firstBetDate = _.minBy($scope.slipItems.slip, function (m) {
-          return m.date;
-        }).date;
-        //last match
-        var lastBetDate = _.maxBy($scope.slipItems.slip, function (m) {
-          return m.date;
-        }).date;
-        lastBetDate = new Date(lastBetDate);
-        $scope.slipItems.lastBetDate = new Date(lastBetDate.getTime() + 105 * 60000); //add 105 minutes for the match to complete
+      if (_.isEmpty($scope.matches)) {
+        toastr.warning('No matches are available for your current selection', 'Opps!');
+      } else {
+        $scope.slipItems = {};
+        $scope.slipItems.selectedTipStyle = 'style-' + style;
+        $scope.slipItems.selectedTipFont = 'slip-text-' + style;
+        $scope.slipItems.slipLabel = label;
+        $scope.slipItems.targetOdds = targetOdds;
+        $scope.slipItems.slip = slipGeneration.generateSlip($scope.matches, targetOdds);
+        if (!_.isEmpty($scope.slipItems.slip)) {
+          $scope.slipItems.slipOdds = slipGeneration.calculateSlipOdds($scope.slipItems.slip);
+          //earliest match
+          $scope.slipItems.firstBetDate = _.minBy($scope.slipItems.slip, function (m) {
+            return m.date;
+          }).date;
+          //last match
+          var lastBetDate = _.maxBy($scope.slipItems.slip, function (m) {
+            return m.date;
+          }).date;
+          lastBetDate = new Date(lastBetDate);
+          $scope.slipItems.lastBetDate = new Date(lastBetDate.getTime() + 105 * 60000); //add 105 minutes for the match to complete
+        }
+        toastr.info('', label + ' slip created');
       }
     };
 
