@@ -54,6 +54,22 @@ internal class ErrorMapper {
         return ErrorResponse(error.javaClass.simpleName, "Invalid request attributes")
     }
 
+    // catch all errors
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseBody
+    fun handleException(error: Exception): ErrorResponse {
+        log.error("${error.message}", error)
+        return ErrorResponse("Server Error", "Something failed.")
+    }
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseBody
+    fun handleException(error: RuntimeException): ErrorResponse {
+        log.error("${error.message}", error)
+        return ErrorResponse("Server Error", "Something failed.")
+    }
+
     private fun createResponseBody(error: Exception): ErrorResponse {
         return ErrorResponse(error.javaClass.simpleName, error.message.orEmpty())
     }

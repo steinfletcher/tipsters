@@ -72,13 +72,17 @@ internal class WillHillOddsFeedSaxHandler(val start: LocalDateTime, val end: Loc
         val nameAttribute = parseName(attr.getValue("name"))
         val betType = nameAttribute.second
         if (betType == "Match Betting") {
-            return Match(
-                    home = nameAttribute.first[0],
-                    away = nameAttribute.first[1],
-                    betType = nameAttribute.second,
-                    bets = bets,
-                    date = parseDateTime(attr.getValue("date"), attr.getValue("time")),
-                    url = attr.getValue("url"))
+            if (nameAttribute.first.size != 2) {
+                return null
+            } else {
+                return Match(
+                        home = nameAttribute.first[0],
+                        away = nameAttribute.first[1],
+                        betType = nameAttribute.second,
+                        bets = bets,
+                        date = parseDateTime(attr.getValue("date"), attr.getValue("time")),
+                        url = attr.getValue("url"))
+            }
         } else {
             return null
         }
