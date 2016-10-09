@@ -11,13 +11,12 @@ public class OddsClient {
   }
 
   public interface Europe {
-    @GET("/openbet_cdn?action=template&template=getHierarchyByMarketType&classId=1&marketSort=MR&filterBIR=N")
+    @GET("/openbet_cdn?action=template&template=getHierarchyByMarketType&classId=46&marketSort=MR&filterBIR=N")
     Call<ResponseBody> matches();
   }
 
   public interface International {
-    @GET("/openbet_cdn?action=template&template=getHierarchyByMarketType&classId=1&marketSort=MR&filterBIR=N")
+    @GET("/openbet_cdn?action=template&template=getHierarchyByMarketType&classId=36&marketSort=MR&filterBIR=N")
     Call<ResponseBody> matches();
   }
 }
-

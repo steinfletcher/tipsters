@@ -93,6 +93,7 @@
                 <version>${spring-boot.version}</version>
                 <configuration>
                     <executable>true</executable>
+                    <finalName>tipsters-api</finalName>
                 </configuration>
                 <executions>
                     <execution>
