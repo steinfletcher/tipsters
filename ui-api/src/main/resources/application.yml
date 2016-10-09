@@ -1,0 +1,26 @@
+
+server:
+  context-path: /api/tipsters
+  port: 19000
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tipsters
+    username: postgres
+    password: postgres
+    driver: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+tipsters:
+  willHillFeedUrl: http://cachepricefeeds.williamhill.com/
+  allowedOrigins:
+    - http://0.0.0.0:9000
+    - http://localhost:9000
+    - http://tipsters.io
+
+logging.level.: INFO
+logging.level:
+  io.tipsters: DEBUG
