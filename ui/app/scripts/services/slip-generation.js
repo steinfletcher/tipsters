@@ -25,6 +25,7 @@ angular.module('tipstersApp')
      */
     api.generateSlip = function (competitions, targetOdds) {
       //rearrange matches into single ordered array
+
       var orderedMatches = returnLowestOddsArray(competitions);
       var closestSlip = [];
       for (var i = 3; i <= MAX_SLIP_SIZE; i++) {

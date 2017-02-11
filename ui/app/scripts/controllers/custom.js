@@ -17,7 +17,7 @@ angular.module('tipstersApp')
     $scope.targetOdds = 10;
 
     //fetch the countries and competitions available
-    dataRetrieval.getCountries(100).success(function (data) {
+    dataRetrieval.getCountries(100).then(function (data) {
       _.each(data, function (country) {
         _.each(country.competitions, function (competition) {
           competition.selected = false;
@@ -50,7 +50,7 @@ angular.module('tipstersApp')
       });
 
       if (!_.isEmpty(selectedCompIds)) {
-        dataRetrieval.getMatches(selectedCompIds).success(function (data) {
+        dataRetrieval.getMatches(selectedCompIds).then(function (data) {
           $scope.matches = data;
           if(!_.isEmpty($scope.matches)){
             $scope.generateSlip($scope.targetOdds);

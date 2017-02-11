@@ -65,7 +65,7 @@
     <p class="subtitle">You can create betting slips from league and cup competitions across Europe. <br/> Choose from
       our predefined competition groups or <a href="#custom" style="color: #f36;"> select your own!</a></p>
     <div class="row slip-text-hover">
-      <div class="col-xs-12 col-sm-4 col-lg-4 item-service">
+      <div class="col-xs-12 col-sm-4 col-lg-4 item-service" ng-hide="true">
         <a href="#slip"  ng-click="setSelectedCompetition('euro-2016')">
           <div class="service-item">
             <i class="icon ion-trophy"></i><h4>Euro 2016</h4>
@@ -73,20 +73,20 @@
           </div>
         </a>
       </div>
-      <div class="col-xs-12 col-sm-4 col-lg-4 item-service">
+      <div class="col-xs-12 col-sm-4 col-lg-4 item-service" ng-hide="true">
         <a href="#slip"  ng-click="setSelectedCompetition('copa-america')">
           <div class="service-item"><i class="icon ion-android-sunny"></i><h4>Copa America</h4>
             <p>A tailored betslip from the the Copa America 2016 Championship </p></div>
         </a>
       </div>
-      <div class="col-xs-12 col-sm-4 col-lg-4 item-service">
+      <div class="col-xs-12 col-sm-4 col-lg-4 item-service"  ng-hide="true">
         <a href="#slip"  ng-click="setSelectedCompetition('internationals')">
           <div class="service-item"><i class="icon ion-ios-football"></i><h4>All Internationals</h4>
             <p>Bets from all international matches this summer from around the world!</p>
           </div>
         </a>
       </div>
-      <div class="col-xs-12 col-sm-4 col-lg-4 item-service" ng-hide="true">
+      <div class="col-xs-12 col-sm-4 col-lg-4 item-service" >
         <a href="#slip"  ng-click="setSelectedCompetition('european-elite')">
           <div class="service-item">
             <i class="icon ion-trophy"></i><h4>European Elite</h4>
@@ -95,13 +95,13 @@
         </a>
       </div>
       <div class="col-xs-12 col-sm-4 col-lg-4 item-service">
-        <a href="#slip"  ng-click="setSelectedCompetition('domestic')"  ng-hide="true">
+        <a href="#slip"  ng-click="setSelectedCompetition('domestic')" >
           <div class="service-item"><i class="icon ion-umbrella"></i><h4>English Domestic</h4>
             <p>A tailored betslip from the domestic leagues</p></div>
         </a>
       </div>
-      <div class="col-xs-12 col-sm-4 col-lg-4 item-service">
-        <a href="#slip"  ng-click="setSelectedCompetition('grass-roots')"  ng-hide="true">
+      <div class="col-xs-12 col-sm-4 col-lg-4 item-service" ng-hide="true">
+        <a href="#slip"  ng-click="setSelectedCompetition('grass-roots')">
           <div class="service-item"><i class="icon ion-ios-football"></i><h4>Grass Roots</h4>
             <p>Lower league games crafted by our experts</p>
           </div>
@@ -123,7 +123,7 @@
       view the <a href="#slip"> bet slip </a></p>
     <div class="row">
       <div ng-repeat="country in countries">
-        <div class="col-md-4 col-xs-12 item-service" ng-repeat="competition in country.competitions">
+        <div class="col-md-4 col-xs-12 item-service" ng-repeat="competition in country.competitions" ng-show="competition.active && (competition.rank == 1 || competition.rank == 2) ">
           <div ng-click="competitionClicked(competition)"
                ng-class="competition.selected ? 'selected-comp' : 'unselected-comp'" class="tipster-btn">
             {{competition.name}}
@@ -213,7 +213,7 @@
 
 <!-- build:js(.) scripts/vendor.js -->
 <!-- bower:js -->
-<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/jquery/jquery.js"></script>
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <script src="bower_components/angular-animate/angular-animate.js"></script>

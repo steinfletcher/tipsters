@@ -71,7 +71,7 @@ $(document).ready(function(){
     /* ------------------------------------- */
 
     var onMobile = false;
-        
+
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) { onMobile = true; }
 
     if( ( onMobile === false ) ) {
@@ -98,8 +98,8 @@ $(document).ready(function(){
     }
 
     // Tooltips used on only from 1025px
-    if (window.matchMedia("(min-width: 1025px)").matches) { 
-            
+    if (window.matchMedia("(min-width: 1025px)").matches) {
+
         $(function () { $("[data-toggle='tooltip']").tooltip(); });
 
     }

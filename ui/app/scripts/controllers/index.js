@@ -26,22 +26,33 @@ angular.module('tipstersApp')
     $scope.targetOdds = 100;
 
     $scope.setSelectedCompetition = function (group) {
-      dataRetrieval.getCategories().success(function (categories) {
-        $scope.category = _.find(categories, ['name', group]);
-        dataRetrieval.getMatches($scope.category.competitionIDs).success(function (data) {
-          $scope.matches = data;
+      dataRetrieval.getCategories().then(function (result) {
+        var categories = result.data;
+        $scope.category = _.find(categories, function(category){
+          return category.name === group;
+        });
+        dataRetrieval.getMatches($scope.category.competitionIDs).then(function (data) {
+          $scope.matches = [];
+          var matches = data.data;
+          _.each(matches, function (comp) {
+            comp.matches = _.uniqBy(comp.matches, function (e) {
+              return e.url;
+            });
+            $scope.matches.push(comp);
+          });
         });
       });
     };
 
     //fetch the countries and competitions available
-    dataRetrieval.getCountries(100).success(function (data) {
-      _.each(data, function (country) {
+    dataRetrieval.getCountries(100).then(function (result) {
+      var countries = result.data;
+      _.each(countries, function (country) {
         _.each(country.competitions, function (competition) {
           competition.selected = false;
         });
       });
-      $scope.countries = data;
+      $scope.countries = countries;
     });
 
     /**
@@ -73,8 +84,15 @@ angular.module('tipstersApp')
     $scope.$watch('selectedCompIds', _.debounce(function (selectedCompIds) {
       $scope.$apply(function () {
         if (!_.isEmpty(selectedCompIds)) {
-          dataRetrieval.getMatches(selectedCompIds).success(function (data) {
-            $scope.matches = data;
+          dataRetrieval.getMatches(selectedCompIds).then(function (data) {
+            $scope.matches = [];
+            var matches = data.data;
+            _.each(matches, function (comp) {
+              comp.matches = _.uniqBy(comp.matches, function (e) {
+                return e.url;
+              });
+              $scope.matches.push(comp);
+            });
             /*
             if (!_.isEmpty($scope.matches)) {
               $scope.generateSlip($scope.targetOdds, 'Night Out', 'primary');
