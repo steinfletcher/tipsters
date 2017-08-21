@@ -2,7 +2,7 @@ ALTER TABLE competitions
   ADD active BOOL DEFAULT TRUE NOT NULL;
 
 UPDATE competitions
-SET active = TRUE
+SET active = FALSE
 WHERE name IN (
   'English Premier League',
   'English FA Cup',
@@ -11,6 +11,7 @@ WHERE name IN (
   'English League 2',
   'English National League',
   'Scottish Premiership',
+  'William Hill Scottish Cup',
   'Scottish Championship',
   'Scottish League One',
   'Scottish League Two',
