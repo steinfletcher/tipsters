@@ -1,0 +1,25 @@
+version: '2'
+services:
+
+  api:
+    image: steinf/tipsters-api:latest
+    expose:
+      - 80
+    ports:
+      - "19000:80"
+    depends_on:
+      - database
+    environment:
+      SERVER_PORT: 80
+      SERVER_CONTEXT_PATH: /api/tipsters
+      MANAGEMENT_PORT: 8081
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/tipsters
+      SPRING_DATASOURCE_USERNAME: tipsters
+      SPRING_DATASOURCE_PASSWORD: notTheRealPasswordL0L
+
+  database:
+    image: postgres:9.4
+    environment:
+      POSTGRES_USER: tipsters
+      POSTGRES_PASSWORD: notTheRealPasswordL0L
+      POSTGRES_DB: tipsters
