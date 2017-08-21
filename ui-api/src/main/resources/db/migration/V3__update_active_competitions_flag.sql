@@ -1,5 +1,5 @@
 UPDATE competitions
-SET active = FALSE
+SET active = TRUE
 WHERE name IN (
   'English Premier League',
   'English FA Cup',
