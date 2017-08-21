@@ -1,6 +1,3 @@
-ALTER TABLE competitions
-  ADD active BOOL DEFAULT TRUE NOT NULL;
-
 UPDATE competitions
 SET active = FALSE
 WHERE name IN (
